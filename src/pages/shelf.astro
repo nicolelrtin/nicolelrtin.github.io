@@ -1,45 +1,61 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PostCard from '../components/PostCard.astro';
-import { getCollection } from 'astro:content';
+import Layout from "../layouts/Layout.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
 
-const books = (await getCollection('shelf')).sort(
-    (a, b) => b.data.dateRead.valueOf() - a.data.dateRead.valueOf()
+const books = (await getCollection("shelf")).sort(
+    (a, b) => b.data.dateRead.valueOf() - a.data.dateRead.valueOf(),
 );
 
 const title = "Shelf";
+const description = "complete reading list.";
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
     <section>
         <h1 class="page-title">shelf.</h1>
+        <p class="page-description">{description}</p>
         <div class="books-list">
-             {books.length > 0 ? (
-                books.map((book) => (
-                    <PostCard
-                        title={book.data.title}
-                        description={`by ${book.data.author}`}
-                        subtext={book.data.rating ? `${"★".repeat(book.data.rating)}${"☆".repeat(5-book.data.rating)}` : ''}
-                        href="#" 
-                        image={book.data.cover}
-                    />
-                ))
-            ) : (
-                <p class="empty-state">Reading list is empty.</p>
-            )}
+            {
+                books.length > 0 ? (
+                    books.map((book) => (
+                        <PostCard
+                            title={book.data.title}
+                            description={`by ${book.data.author}`}
+                            subtext={
+                                book.data.rating
+                                    ? `${"★".repeat(book.data.rating)}${"☆".repeat(5 - book.data.rating)}`
+                                    : ""
+                            }
+                            href="#"
+                            image={book.data.cover}
+                        />
+                    ))
+                ) : (
+                    <p class="empty-state">Reading list is empty.</p>
+                )
+            }
         </div>
     </section>
 </Layout>
 
 <style>
     .page-title {
+        margin-bottom: 1rem;
+    }
+
+    .page-description {
+        font-size: 1.2rem;
+        color: var(--color-text-muted);
+        max-width: 600px;
         margin-bottom: 3rem;
+        line-height: 1.5;
     }
 
     .books-list {
         max-width: 700px;
     }
-    
+
     .empty-state {
         color: var(--color-text-muted);
         font-style: italic;

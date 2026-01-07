@@ -14,6 +14,7 @@ const description = "peer-reviewed academic papers and abstracts.";
 <Layout title={title} description={description}>
     <section>
         <h1 class="page-title">publications.</h1>
+        <p class="page-description">{description}</p>
         <div class="pubs-list">
             {
                 publications.length > 0 ? (
@@ -36,7 +37,15 @@ const description = "peer-reviewed academic papers and abstracts.";
 
 <style>
     .page-title {
+        margin-bottom: 1rem;
+    }
+
+    .page-description {
+        font-size: 1.2rem;
+        color: var(--color-text-muted);
+        max-width: 600px;
         margin-bottom: 3rem;
+        line-height: 1.5;
     }
 
     .pubs-list {

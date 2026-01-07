@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const description = "Nicole T. AI/ML R&D at Gilead Sciences.";
 ---
 
-<Layout title="Home | Personal Website">
+<Layout title="Home | Personal Website" description={description}>
     <section class="intro">
         <h1 class="hero-title">about.</h1>
-        <p class="bio">Nicole T. AI/ML R&D at Gilead Sciences.</p>
+        <p class="page-description">{description}</p>
     </section>
 </Layout>
 
@@ -16,13 +18,14 @@ import Layout from "../layouts/Layout.astro";
     }
 
     .hero-title {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
-    .bio {
+    .page-description {
         font-size: 1.2rem;
         color: var(--color-text-muted);
         max-width: 600px;
-        margin-bottom: 1.5rem;
+        margin-bottom: 3rem;
+        line-height: 1.5;
     }
 </style>
