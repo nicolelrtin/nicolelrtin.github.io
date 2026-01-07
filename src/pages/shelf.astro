@@ -21,6 +21,7 @@ const title = "Shelf";
                         description={`by ${book.data.author}`}
                         subtext={book.data.rating ? `${"★".repeat(book.data.rating)}${"☆".repeat(5-book.data.rating)}` : ''}
                         href="#" 
+                        image={book.data.cover}
                     />
                 ))
             ) : (

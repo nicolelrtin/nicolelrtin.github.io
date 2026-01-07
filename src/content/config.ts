@@ -28,6 +28,7 @@ const publicationsCollection = defineCollection({
         journal: z.string().optional(),
         pubDate: z.date(),
         link: z.string().url().optional(),
+        image: z.string().optional(),
     }),
 });
 
