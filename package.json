@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "astro": "^5.16.6",
+    "fast-xml-parser": "^5.3.3",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0"
   }

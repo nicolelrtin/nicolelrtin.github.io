@@ -9,7 +9,7 @@ tags: ["linguistics"]
 
 <blockquote>“Later tonight, I’ll read or cook before going to bed.”</blockquote>
 
-Usually, I use the phrase *or* to mean *one or the other, but not both*, as a complement to my frequent usage of *and/or*. As much as I like the latter phrase, *and/or*, it can be cumbersome to throw in a slash every time. Yes, I often use keyboard replacements, but its such a critical junction that there must be a better symbol than the monstrosity *"&or"* I’ve seen before. So imagine my surprise, when online sources tell me the symbol for *and/or* is merely *or*: *or* is grammatically used to mean *one, the other, both*. 
+Usually, I use the phrase *or* to mean *one or the other, but not both*, as a complement to my frequent usage of *and/or*. As much as I like the latter phrase, *and/or*, it can be cumbersome to throw in a slash every time. Yes, I often use keyboard replacements, but its such a critical conjunction that there must be a better symbol than the monstrosity *"&or"* I’ve seen before. So imagine my surprise, when online sources tell me the symbol for *and/or* is merely *or*: *or* is grammatically used to mean *one, the other, both*. 
 
 ## disambiguation
 

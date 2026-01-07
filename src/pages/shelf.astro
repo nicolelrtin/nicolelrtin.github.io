@@ -1,46 +1,146 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PostCard from "../components/PostCard.astro";
-import { getCollection } from "astro:content";
+import { XMLParser } from "fast-xml-parser";
+export const prerender = false;
 
-const books = (await getCollection("shelf")).sort(
-    (a, b) => b.data.dateRead.valueOf() - a.data.dateRead.valueOf(),
-);
+const GOODREADS_ID = "24646854";
 
-const title = "Shelf";
+interface Book {
+    title: string;
+    author: string;
+    image: string;
+    link: string;
+    dateRead?: string;
+    dateAdded: string;
+    rating?: number;
+    shelf: "read" | "reading";
+}
+
+async function fetchShelf(
+    shelf: "read" | "currently-reading",
+): Promise<Book[]> {
+    const url = `https://www.goodreads.com/review/list_rss/${GOODREADS_ID}?shelf=${shelf}`;
+    try {
+        const response = await fetch(url);
+        const xml = await response.text();
+        const parser = new XMLParser({
+            ignoreAttributes: false,
+            attributeNamePrefix: "@_",
+        });
+        const data = parser.parse(xml);
+        const items = data?.rss?.channel?.item;
+
+        if (!items) return [];
+        const booksArray = Array.isArray(items) ? items : [items];
+
+        return booksArray.map((item: any) => ({
+            title: item.title,
+            author: item.author_name,
+            image: item.book_image_url,
+            link: item.link,
+            dateRead: item.user_read_at,
+            dateAdded: item.user_date_added,
+            rating: item.user_rating,
+            shelf: shelf === "currently-reading" ? "reading" : "read",
+        }));
+    } catch (error) {
+        console.error(`Error fetching Goodreads shelf ${shelf}:`, error);
+        return [];
+    }
+}
+
+const reading = await fetchShelf("currently-reading");
+const read = await fetchShelf("read");
+
+// Prepare flattened list of books with labels
+const allBooks: (Book & { groupLabel?: string })[] = [];
+
+if (reading.length > 0) {
+    reading.forEach((book, i) => {
+        allBooks.push({
+            ...book,
+            groupLabel: i === 0 ? "Currently Reading" : undefined,
+        });
+    });
+}
+
+// Sort read books by dateRead descending
+const sortedRead = read.sort((a, b) => {
+    const dateA = new Date(a.dateRead || a.dateAdded).getTime();
+    const dateB = new Date(b.dateRead || b.dateAdded).getTime();
+    return dateB - dateA;
+});
+
+let lastLabel = "";
+sortedRead.forEach((book) => {
+    const date = new Date(book.dateRead || book.dateAdded);
+    const label = date.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric",
+    });
+
+    allBooks.push({
+        ...book,
+        groupLabel: label !== lastLabel ? label : undefined,
+    });
+    lastLabel = label;
+});
+
+const title = "shelf.";
 const description = "complete reading list.";
 ---
 
-<Layout title={title} description={description}>
-    <section>
-        <h1 class="page-title">shelf.</h1>
+<Layout title="Shelf | Personal Website" description={description}>
+    <section class="page-header">
+        <h1 class="page-title">{title}</h1>
         <p class="page-description">{description}</p>
-        <div class="books-list">
+    </section>
+
+    <div class="shelf-container">
+        <div class="book-grid">
             {
-                books.length > 0 ? (
-                    books.map((book) => (
-                        <PostCard
-                            title={book.data.title}
-                            description={`by ${book.data.author}`}
-                            subtext={
-                                book.data.rating
-                                    ? `${"★".repeat(book.data.rating)}${"☆".repeat(5 - book.data.rating)}`
-                                    : ""
-                            }
-                            href="#"
-                            image={book.data.cover}
-                        />
-                    ))
-                ) : (
-                    <p class="empty-state">Reading list is empty.</p>
-                )
+                allBooks.map((book, index) => (
+                    <div
+                        class="book-item"
+                        style={`z-index: ${allBooks.length - index};`}
+                    >
+                        {book.groupLabel && (
+                            <div class="shelf-sidebar">
+                                <span class="date-label">
+                                    {book.groupLabel}
+                                </span>
+                            </div>
+                        )}
+                        <a
+                            href={book.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="book-card"
+                            style={`width: ${120 + (book.rating ?? 0) * 20}px;`}
+                        >
+                            <img
+                                src={book.image.replace(/\._S[XY]\d+_/, "")}
+                                alt={`Cover of ${book.title}`}
+                                loading="lazy"
+                                style="width: 100%; height: auto;"
+                            />
+                        </a>
+                    </div>
+                ))
             }
         </div>
-    </section>
+    </div>
 </Layout>
 
 <style>
+    .page-header {
+        margin-bottom: 3rem;
+    }
+
     .page-title {
+        font-family: var(--font-serif, "Times New Roman", serif);
+        font-size: 3rem;
+        font-weight: 400;
         margin-bottom: 1rem;
     }
 
@@ -52,12 +152,117 @@ const description = "complete reading list.";
         line-height: 1.5;
     }
 
-    .books-list {
-        max-width: 700px;
+    .shelf-container {
+        margin-top: 2rem;
     }
 
-    .empty-state {
+    .book-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    @media (min-width: 900px) {
+        .book-grid {
+            margin-left: 100px; /* Minimal space for the sidebar */
+        }
+
+        :global(.container) {
+            padding-left: 0.5rem; /* Reduced to accommodate sidebar */
+        }
+    }
+
+    .book-item {
+        /* No position: relative here for desktop so sidebar labels align to grid */
+    }
+
+    .shelf-sidebar {
+        width: 80px;
+        position: absolute;
+        left: -100px;
+        text-align: right;
+        border-top: 1px solid #eee;
+        padding-top: 0.5rem;
+        background: var(
+            --color-bg,
+            white
+        ); /* Cover overlapping labels in same row */
+    }
+
+    @media (min-width: 900px) {
+        .book-item {
+            position: static; /* Ensure the absolute sidebar is relative to .book-grid */
+        }
+    }
+
+    @media (max-width: 899px) {
+        .book-grid {
+            margin-left: 0;
+        }
+
+        .book-item {
+            position: relative;
+            display: contents;
+        }
+
+        .shelf-sidebar {
+            position: static;
+            width: 100%;
+            text-align: left;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .book-item:has(.shelf-sidebar) {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .date-label {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
         color: var(--color-text-muted);
-        font-style: italic;
+        letter-spacing: 0.02em;
+        display: block;
+    }
+
+    .book-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .book-card:hover {
+        transform: translateY(-8px);
+        z-index: 10;
+    }
+
+    .book-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 2px;
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.08),
+            0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .book-card:hover img {
+        box-shadow:
+            0 12px 24px rgba(0, 0, 0, 0.12),
+            0 4px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (max-width: 600px) {
+        .page-title {
+            font-size: 2.5rem;
+        }
     }
 </style>
