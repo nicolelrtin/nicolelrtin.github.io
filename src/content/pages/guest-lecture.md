@@ -1,8 +1,8 @@
 ---
 title: "The Guest Lecture by Martin Riker"
-description: "Book Review. 3/5."
+description: "Book Review. Creative 3/5."
 pubDate: 2025-11-24
-tags: ["review", "books"]
+tags: ["books"]
 ---
 Read or comment on this review on [Goodreads](https://www.goodreads.com/review/show/7835178561).
  

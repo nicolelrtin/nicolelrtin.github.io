@@ -7,6 +7,18 @@ const posts = (await getCollection("pages")).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+function getPreview(content: string) {
+    // Remove markdown symbols and extra whitespace
+    const stripped = content
+        .replace(/[#*`_]/g, "")
+        .replace(/\[(.*?)\]\(.*?\)/g, "$1")
+        .replace(/\n+/g, " ")
+        .trim();
+    return stripped.length > 200
+        ? stripped.substring(0, 200) + "..."
+        : stripped;
+}
+
 const title = "Blog";
 const description =
     "a collection of opinions, including book reviews and personal philosophies.";
@@ -16,6 +28,9 @@ const description =
     <section>
         <h1 class="page-title">blog.</h1>
         <p class="page-description">{description}</p>
+
+        <div class="list-header"></div>
+
         <div class="posts-list">
             {
                 posts.length > 0 ? (
@@ -23,6 +38,7 @@ const description =
                         <ListItem
                             title={post.data.title}
                             description={post.data.description}
+                            preview={getPreview(post.body)}
                             pubDate={post.data.pubDate}
                             tags={post.data.tags}
                             href={`/blog/${post.slug}`}
@@ -50,14 +66,18 @@ const description =
         font-size: 1.2rem;
         color: var(--color-text-muted);
         max-width: 600px;
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
         line-height: 1.5;
+    }
+
+    .list-header {
+        border-top: 1px solid #e5e5e5;
+        margin-bottom: 3rem;
     }
 
     .posts-list {
         display: flex;
         flex-direction: column;
-        max-width: 800px; /* Optional: limit width for better readability */
     }
 
     .empty-state {

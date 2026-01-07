@@ -2,7 +2,7 @@
 title: "If You're Not Yet Like Me by Edan Lepucki"
 description: "Book Review. Enticing 4/5."
 pubDate: 2025-10-20
-tags: ["review", "books"]
+tags: ["books"]
 ---
 Read or comment on this review on [Goodreads](https://www.goodreads.com/review/show/7835197860).
 

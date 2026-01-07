@@ -2,12 +2,13 @@
 title: "The Harder I Fight, The More I Love You: A Memoir by Neko Case"
 description: "Book Review. Good 3/5."
 pubDate: 2025-03-13
-tags: ["review", "books"]
+tags: ["books"]
 ---
 
-More thoughts. 
-Background- I was introduced to Neko Case, and in turn this book, by her conversation with Hanif Abdurraqib at SF City Arts and Lectures. While I'm not sure I would pay another $70 to attend as a twenty-something, I so appreciate the free public broadcasting and am grateful to have finally attended one(!)
+## Background
+I was introduced to Neko Case, and in turn this book, by her conversation with Hanif Abdurraqib at SF City Arts and Lectures. While I'm not sure I would pay another $70 to attend a 60-90 minute conversation as a twenty-something, I really enjoyed it and do my best to support free public broadcasting.
 
+## Thoughts
 For a long time, holding this book in my hands, I was thinking of giving it a low rating. I didn't really like the writing style and the material was a bit mentally tough. But then, I found I had read another 100 pages and couldn't actually put it down.
 
 Neko Case has a very distinct writing style that, in my eyes, is wild and jumbly and reads more like a conversation. But that's exactly what makes it so compelling, I feel exactly situated in her mind. She has a distinct writing voice and inner thought that draws you into her storytelling. For a while it felt forced, but now that I've sat with it, it feels intimate. Like I am reading her plainly, as a close friend, being entrusted with her dark past and dirty secrets. 
@@ -24,6 +25,6 @@ and coming to pride in what you do;
 
 Would recommend to those interested.  
 
-Now listening to:
+## Now listening to:
 * I Wish I Was the Moon by Neko Case
 * Sunny Came Home by Shawn Colvin

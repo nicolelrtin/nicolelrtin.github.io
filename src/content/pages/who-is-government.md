@@ -2,7 +2,7 @@
 title: "Who is Government? by Michael Lewis"
 description: "My most-liked book review on goodreads. Very good 5/5."
 pubDate: 2025-05-25
-tags: ["review", "books"]
+tags: ["books"]
 ---
 Read or comment on this review on [Goodreads](https://www.goodreads.com/review/show/7080462035). 
 

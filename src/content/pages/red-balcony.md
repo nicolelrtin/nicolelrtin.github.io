@@ -2,7 +2,7 @@
 title: "The Red Balcony by Jonathan Wilson"
 description: "Book Review. A political thriller, mystery, and philosophy. 4/5."
 pubDate: 2025-07-07
-tags: ["review", "books"]
+tags: ["books"]
 ---
 
 I came to The Red Balcony with little prior knowledge of the time period, and instead learned more about the specific political context in discussions outside of the book. The Red Balcony well reflected the questions raised; it was politically rich and thought-provoking. It explored the relevant controversies in Zionist divisions, British imperialism, and the silence around Arab resistance. 

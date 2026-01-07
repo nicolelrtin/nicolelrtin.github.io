@@ -2,7 +2,7 @@
 title: "Dress Your Family in Corduroy and Denim by David Sedaris"
 description: "Book Review. 4/5."
 pubDate: 2025-06-21
-tags: ["review", "books"]
+tags: ["books"]
 ---
 
 ## Summmary

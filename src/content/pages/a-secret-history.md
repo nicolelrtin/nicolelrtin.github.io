@@ -2,7 +2,7 @@
 title: "A Secret History by Donna Tartt"
 description: "Book Review. Interesting, no rating."
 pubDate: 2025-02-26
-tags: ["review", "books"]
+tags: ["books"]
 ---
 
 Some thoughts, not a book report.
