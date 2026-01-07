@@ -1,5 +1,5 @@
 ---
-title: "The English 'Or'"
+title: "Or"
 description: "Thoughts on the double meaning of 'or'."
 pubDate: 2026-01-05
 tags: ["linguistics"]
