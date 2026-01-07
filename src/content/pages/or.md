@@ -13,7 +13,7 @@ Usually, I use the phrase *or* to mean *one or the other, but not both*, as a co
 
 ## disambiguation
 
-Seeing this, I was baffled and dumbstruck by my obliviousness; could it be that simple? In programming and logic notation, *or* is used to mean just that: *one, the other, both*, with the logical symbol $\lor$ used to denote this definition. On the other hand, xor, denoted by $\oplus$, is used to mean one, the other, but not both. The former is known as *“inclusive or”*, and the latter as *“exclusive or”* to indicate whether both options can be true or not (inclusive or exclusive). 
+Seeing this, I was baffled and dumbstruck by my obliviousness; could it be that simple? In programming and logic notation, *or* is used to mean just that: *one, the other, including both*, denoted using the logical symbol $\lor$. On the other hand, xor, denoted by $\oplus$, is used to mean *one, the other, excluding both*. The former is known as *“inclusive or”*, and the latter as *“exclusive or”* to indicate whether both options can be true or not (inclusive or exclusive). 
 
 ## english propositional logic
 
