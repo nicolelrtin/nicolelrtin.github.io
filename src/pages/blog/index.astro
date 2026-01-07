@@ -7,14 +7,14 @@ const posts = (await getCollection("pages")).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const title = "Pages";
+const title = "Blog";
 const description =
-    "an uncollected collection of thoughts, ranging from book reviews to anything i am interested in.";
+    "a collection of opinions, including book reviews and personal philosophies.";
 ---
 
 <Layout title={title} description={description}>
     <section>
-        <h1 class="page-title">pages.</h1>
+        <h1 class="page-title">blog.</h1>
         <p class="page-description">{description}</p>
         <div class="posts-list">
             {
@@ -25,7 +25,7 @@ const description =
                             description={post.data.description}
                             pubDate={post.data.pubDate}
                             tags={post.data.tags}
-                            href={`/pages/${post.slug}`}
+                            href={`/blog/${post.slug}`}
                         />
                     ))
                 ) : (

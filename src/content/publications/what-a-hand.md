@@ -1,0 +1,10 @@
+---
+title: "What a Hand Can Tell Us: Artificial Intelligence to Predict the Age of a Hand"
+journal: "Journal of the American Academy of Dermatology"
+pubDate: 2025-09-01
+link: "https://www.jaad.org/article/S0190-9622(25)02091-2/abstract"
+image: "https://www.jaad.org/cms/asset/f7705fda-ccfe-4250-8457-3b20ff2bf0c0/cov200h.gif"
+
+---
+
+Artificial intelligence (AI) has begun reshaping healthcare and has been trialed in dermatologic contexts including teledermatology, triaging referrals, dermatopathology, and age prediction. Characterizing aging is important for medical and aesthetic reasons with hands providing a unique opportunity to understand aging-related sun exposure, occupational exposures, and handedness. Hands have equal age predictive value compared to facial photos (+/- 4.7 and 4.1 years respectively). This study aims to create an AI algorithm to predict age +/- 5 years from hand photograph visual patterns. Participants (n=332) were given a demographic and sun-exposure questionnaire and standardized hand photographs were taken. Texture, wrinkles, and redness were analyzed to create an age prediction. Subjects were 39.9% male, 58.9% female (median age 36-37 years). 71.3% were from the Midwest, and 76.7% Caucasian/White. 35.3% report <30 minutes of daily sun, 34.1% report 1 hour. 45.3% reported “never” wearing sunscreen. Average absolute error of prediction was ±12 years (correlation coefficient Rˆ2 = 56%). Top determinant of age was texture, increasing predicted age up to 10 years in some hands. High standard deviation in redness lowered predicted age. Wrinkles had a pattern to increase age, however a high wrinkle area also decreased prediction in some subjects. Results support need for dataset refinement to improve neural networks for more robust prediction. Next steps include analyzing questionnaire meta-data for common variations between chronological age vs predicted age. We envision creation of a skin cancer risk stratification tool based on age prediction timelines, which may better inform monitoring and encourage healthier skin practices.
