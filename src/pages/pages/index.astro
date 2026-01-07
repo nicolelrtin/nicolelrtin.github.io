@@ -1,32 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('pages')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const posts = (await getCollection("pages")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const title = "Pages";
-const description = "Essays and thoughts.";
+const description =
+    "an uncollected collection of thoughts, ranging from book reviews to anything i am interested in.";
 ---
 
 <Layout title={title} description={description}>
     <section>
         <h1 class="page-title">pages.</h1>
         <div class="posts-grid">
-            {posts.length > 0 ? (
-                posts.map((post) => (
-                    <PostCard
-                        title={post.data.title}
-                        description={post.data.description}
-                        pubDate={post.data.pubDate}
-                        href={`/pages/${post.slug}`}
-                    />
-                ))
-            ) : (
-                <p class="empty-state">No essays yet. Check back soon.</p>
-            )}
+            {
+                posts.length > 0 ? (
+                    posts.map((post) => (
+                        <PostCard
+                            title={post.data.title}
+                            description={post.data.description}
+                            pubDate={post.data.pubDate}
+                            href={`/pages/${post.slug}`}
+                        />
+                    ))
+                ) : (
+                    <p class="empty-state">No essays yet. Check back soon.</p>
+                )
+            }
         </div>
     </section>
 </Layout>

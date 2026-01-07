@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: '/', label: 'home' },
-  { href: '/pages', label: 'pages' },
-  { href: '/shelf', label: 'shelf' },
-  { href: '/publications', label: 'publications' },
+  { href: "/", label: "home" },
+  { href: "/pages", label: "pages" },
+  { href: "/shelf", label: "shelf" },
+  { href: "/publications", label: "publications" },
 ];
 
 const { pathname } = Astro.url;
@@ -11,53 +11,67 @@ const { pathname } = Astro.url;
 
 <nav class="nav">
   <ul class="nav-list">
-    {links.map((link) => (
-      <li>
-        <a 
-          href={link.href} 
-          class={pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href)) ? 'active' : ''}
-        >
-          {link.label}
-        </a>
-      </li>
-    ))}
+    {
+      links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(link.href))
+                ? "active"
+                : ""
+            }
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </nav>
 
 <style>
   .nav {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     padding-top: 1rem;
+    display: flex; /* Allow the nav to size to content if needed, or alignment */
   }
-  
+
   .nav-list {
-    display: flex;
-    gap: 1.5rem;
+    display: inline-flex; /* Make it pill-shaped wrapping content */
+    gap: 0.5rem; /* Reduced gap for tighter pill feel */
     list-style: none;
-    padding: 0;
+    padding: 0.5rem 0.75rem; /* Padding inside the pill */
     margin: 0;
+
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 9999px; /* Pill shape */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  }
+
+  .nav-list li {
+    display: flex;
+    align-items: center;
   }
 
   .nav-list li a {
     font-size: 0.95rem;
     font-weight: 400;
     color: var(--color-text-muted);
-    position: relative;
+    text-decoration: none;
+    padding: 0.25rem 0.75rem; /* Hit area padding */
+    border-radius: 9999px; /* Optional: hover effect on items? */
+    transition: color 0.2s ease;
   }
 
-  .nav-list li a:hover,
-  .nav-list li a.active {
+  .nav-list li a:hover {
     color: var(--color-text-main);
   }
-  
-  /* Minimal active indicator */
-  .nav-list li a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-text-main);
+
+  .nav-list li a.active {
+    color: var(--color-text-main);
+    font-weight: 600; /* Bold for active */
   }
 </style>
