@@ -1,6 +1,6 @@
 ---
 title: "The Harder I Fight, The More I Love You: A Memoir by Neko Case"
-description: "Book Review: The Harder I Fight, The More I Love You by Neko Case"
+description: "Book Review. Good 3/5."
 pubDate: 2025-03-13
 tags: ["review", "books"]
 ---

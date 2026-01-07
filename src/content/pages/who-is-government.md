@@ -1,11 +1,11 @@
 ---
 title: "Who is Government? by Michael Lewis"
-description: "My most-liked book review: Who is Government? The Untold Story of Public Service by Michael Lewis"
+description: "My most-liked book review on goodreads. Very good 5/5."
 pubDate: 2025-05-25
 tags: ["review", "books"]
 ---
 
-I put a lot of trust in the authors and editors I read. And so I appreciate the journalistic integrity in profiling government "bureaucrats" without sensationalizing the work, or trying to extrapolate an unnecessary theme (read: Gladwell). Instead, Lewis removes the cloud cover that seems to shroud the rather interesting and vital things being done.
+I put a lot of trust in the authors and editors I read. So I appreciate the journalistic integrity in profiling government "bureaucrats" without sensationalizing the work, or trying to extrapolate an unnecessary theme (read: Gladwell). Instead, Lewis removes the cloud cover that seems to shroud the rather interesting and vital things being done.
 
 Maybe this is saliency bias talking, but I loved most Michael Lewis's sections. ‘The Canary’ profiles a man who rejected higher education to work in a mine, went back to grad school, and researched improved mine interior structural safety. Once in government, he was able to set standards for mine safety and inspection, completely eliminating roof collapse as a cause of death. True to the prologue, these stories felt truly underreported yet critically important. They not only explored why certain government functions exist but also examined how solutions in these systems emerge. This is why I enjoy reading books, because it is not constrained to audience metrics, airtime, and enjoys as much thought/research as the author will invest.
 
