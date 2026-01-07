@@ -1,0 +1,10 @@
+---
+title: "Molecular determinants of tissue specificity of flavivirus nonstructural protein 1 interaction with endothelial cells"
+journal: "Journal of Virology"
+pubDate: 2022-10-12
+link: "https://doi.org/10.1128/jvi.00661-22"
+image: "https://journals.asm.org/cms/10.1128/jvi.00661-22/asset/45b252f8-5e90-4914-9677-6d8742155564/assets/images/large/jvi.00661-22-f001.jpg"
+
+---
+
+Members of the mosquito-borne flavivirus genus such as dengue (DENV), West Nile (WNV), and Zika (ZIKV) viruses cause distinct diseases and affect different tissues. We previously found that the secreted flaviviral nonstructural protein 1 (NS1) interacts with endothelial cells and disrupts endothelial barrier function in a tissue-specific manner consistent with the disease tropism of the respective viruses. However, the underlying molecular mechanism of this tissue-specific NS1-endothelial cell interaction is not well understood. To elucidate the distinct role(s) that the wing and β-ladder domains of NS1 play in NS1 interactions with endothelial cells, we constructed flavivirus NS1 chimeras that exchanged the wing and β-ladder domains in a pairwise manner between DENV, WNV, and ZIKV NS1. We found that both the NS1 wing and β-ladder domains conferred NS1 tissue-specific endothelial dysfunction, with the wing conferring cell binding and the β-ladder involved in inducing endothelial hyperpermeability as measured by transendothelial electrical resistance. To narrow down the amino acids dictating cell binding specificity, we utilized the DENV-WNV NS1 chimera and identified residues 91 to 93 (GDI) of DENV NS1 as a molecular motif determining binding specificity. Further, using an in vivo mouse model of localized leak, we found that the GDI motif of the wing domain was essential for triggering DENV NS1-induced vascular leak in mouse dermis. Taken together, we identify molecular determinants of flavivirus NS1 that confer NS1 binding and vascular leak and highlight the importance of the NS1 wing domain for flavivirus pathogenesis.
