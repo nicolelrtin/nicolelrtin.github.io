@@ -5,10 +5,10 @@ pubDate: 2025-06-21
 tags: ["review", "books"]
 ---
 
-**Summary** - 
+## Summmary
 A series of short stories chronicling his home life; moving states, a large upper middle class immediate family, a narcissistic stay at home mom, estranged distant relatives, emerging homosexuality.
 
-**Spoilers** - 
+## Spoilers
 Some of his stories have sitcom-like writing, with the introduction of a drama/comedy (a secluded family, a hippie, a beach house) that later pointedly illustrates absurdities of everyday life. These stories end with a bit of a punchline, laying plain his message in an ironic resolution.
 
 David Sedaris' voice is honest and naive, reflecting a child's logic in a way that is difficult to capture after years of learned maturity. (Aside - this is one thing I liked about Jeannette McCurdy's memoir)

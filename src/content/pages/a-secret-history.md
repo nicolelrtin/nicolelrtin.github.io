@@ -1,6 +1,6 @@
 ---
 title: "A Secret History by Donna Tartt"
-description: "Book Review. Interesting, but no rating."
+description: "Book Review. Interesting, no rating."
 pubDate: 2025-02-26
 tags: ["review", "books"]
 ---
@@ -18,6 +18,8 @@ Unfortunately the most remarkable part of the book-- Julian's early lecture-- wa
 
 I'm at a loss, no rating.
 
+
+## Rating
 Spoilers --
 
 If I want to be mean, just watch some murder/thriller + Cruel Intentions instead. Saltburn, maybe.

@@ -1,6 +1,6 @@
 ---
 title: "The Red Balcony by Jonathan Wilson"
-description: "Book Review: a political thriller, mystery, and philosophy. 4/5."
+description: "Book Review. A political thriller, mystery, and philosophy. 4/5."
 pubDate: 2025-07-07
 tags: ["review", "books"]
 ---
