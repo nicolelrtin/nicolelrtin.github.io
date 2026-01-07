@@ -1,0 +1,62 @@
+---
+const links = [
+  { href: '/', label: 'home' },
+  { href: '/pages', label: 'pages' },
+  { href: '/shelf', label: 'shelf' },
+];
+
+const { pathname } = Astro.url;
+---
+
+<nav class="nav">
+  <ul class="nav-list">
+    {links.map((link) => (
+      <li>
+        <a 
+          href={link.href} 
+          class={pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href)) ? 'active' : ''}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .nav {
+    margin-bottom: 4rem;
+    padding-top: 1rem;
+  }
+  
+  .nav-list {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-list li a {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    position: relative;
+  }
+
+  .nav-list li a:hover,
+  .nav-list li a.active {
+    color: var(--color-text-main);
+  }
+  
+  /* Minimal active indicator */
+  .nav-list li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-text-main);
+  }
+</style>
