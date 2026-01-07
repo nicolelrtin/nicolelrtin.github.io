@@ -1,6 +1,6 @@
 ---
-title: "Review: Who is Government?"
-description: "My most-liked book review on Who is Government? The Untold Story of Public Service by Michael Lewis"
+title: "Who is Government? by Michael Lewis"
+description: "My most-liked book review: Who is Government? The Untold Story of Public Service by Michael Lewis"
 pubDate: 2025-05-25
 tags: ["review", "books"]
 ---
