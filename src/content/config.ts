@@ -21,7 +21,18 @@ const booksCollection = defineCollection({
     }),
 });
 
+const publicationsCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        journal: z.string().optional(),
+        pubDate: z.date(),
+        link: z.string().url().optional(),
+    }),
+});
+
 export const collections = {
     'pages': writingCollection,
     'shelf': booksCollection,
+    'publications': publicationsCollection,
 };

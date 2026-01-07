@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const publications = (await getCollection('publications')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const title = "Publications";
+const description = "Academic papers and articles.";
+---
+
+<Layout title={title} description={description}>
+    <section>
+        <h1 class="page-title">publications.</h1>
+        <div class="pubs-list">
+             {publications.length > 0 ? (
+                publications.map((pub) => (
+                    <PostCard
+                        title={pub.data.title}
+                        description={pub.data.journal || ''}
+                        pubDate={pub.data.pubDate}
+                        href={pub.data.link || '#'}
+                    />
+                ))
+            ) : (
+                <p class="empty-state">No publications yet.</p>
+            )}
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .page-title {
+        margin-bottom: 3rem;
+    }
+
+    .pubs-list {
+        max-width: 800px;
+    }
+    
+    .empty-state {
+        color: var(--color-text-muted);
+        font-style: italic;
+    }
+</style>
