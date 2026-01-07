@@ -1,6 +1,6 @@
 ---
 title: "Or"
-description: "Thoughts on the double meaning of 'or'."
+description: "the english word 'or'."
 pubDate: 2026-01-05
 tags: ["linguistics"]
 ---
