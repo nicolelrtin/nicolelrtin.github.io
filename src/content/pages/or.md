@@ -17,10 +17,10 @@ Seeing this, I was baffled and dumbstruck by my obliviousness; could it be that 
 
 ## english propositional logic
 
-While the distinction is made clear in logic notation, this syntax is not used conversationally, nor are there convenient shortcuts on traditional keyboards. The grammatical word for exclusive *or* (*strictly one of two*) is *either*. The full trifecta is supposedly:
+While the distinction is made clear in logic notation, this syntax is not used conversationally, nor are there convenient shortcuts on traditional keyboards. The grammatical word for exclusive *or* (*strictly one of two*) is *either*. Excluding "or", the full trifecta is supposedly:
 
-* Both, And (two of two): $A \land B$
 * Or (one, optionally two): $A \lor B$
+* Both, And (two of two): $A \land B$
 * Either, Or (strictly one of two): $A \oplus B$
 * Neither, Nor (zero of two): ${\neg(A \lor B), \neg A \land \neg B}$
 
