@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: "/", label: "home" },
-  { href: "/pages", label: "pages" },
-  { href: "/shelf", label: "shelf" },
-  { href: "/publications", label: "publications" },
+  { href: "/", label: "Home" },
+  { href: "/pages", label: "Pages" },
+  { href: "/shelf", label: "Shelf" },
+  { href: "/publications", label: "Publications" },
 ];
 
 const { pathname } = Astro.url;
@@ -40,15 +40,17 @@ const { pathname } = Astro.url;
 
   .nav-list {
     display: inline-flex; /* Make it pill-shaped wrapping content */
-    gap: 0.5rem; /* Reduced gap for tighter pill feel */
+    gap: 0.25rem; /* Reduced gap for tighter look */
     list-style: none;
-    padding: 0.5rem 0.75rem; /* Padding inside the pill */
+    padding: 0.25rem 0.5rem; /* Compact padding */
     margin: 0;
 
     background-color: #ffffff;
     border: 1px solid #e5e5e5;
-    border-radius: 9999px; /* Pill shape */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    border-radius: 6px; /* Rectangular with slight rounding */
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -1px rgba(0, 0, 0, 0.03); /* Faint light gray top down drop shadow */
   }
 
   .nav-list li {
@@ -57,21 +59,24 @@ const { pathname } = Astro.url;
   }
 
   .nav-list li a {
-    font-size: 0.95rem;
+    font-size: 0.85rem; /* Smaller font size */
     font-weight: 400;
     color: var(--color-text-muted);
     text-decoration: none;
-    padding: 0.25rem 0.75rem; /* Hit area padding */
-    border-radius: 9999px; /* Optional: hover effect on items? */
-    transition: color 0.2s ease;
+    padding: 0.25rem 0.5rem; /* Compact hit area */
+    border-radius: 4px; /* Matches nav container style */
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
 
   .nav-list li a:hover {
     color: var(--color-text-main);
+    background-color: #f5f5f5; /* Subtle hover background */
   }
 
   .nav-list li a.active {
     color: var(--color-text-main);
-    font-weight: 600; /* Bold for active */
+    /* font-weight: 600; Removed bold as requested */
   }
 </style>

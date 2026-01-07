@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200..400&family=Inter:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:opsz,wght@9..144,200..400&family=Inter:wght@300;400;600&display=swap');
 
 :root {
   --font-serif: 'Fraunces', serif;
   --font-sans: 'Inter', sans-serif;
 
-  --color-bg: #FAFAFA;
+  --color-bg: #FFFFFF;
   --color-text-main: #171717;
-  --color-text-muted: #737373;
+  --color-text-muted: #a3a3a3;
+  /* Lighter gray */
   --color-accent: #262626;
-  
+
   --spacing-unit: 1rem;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -26,7 +29,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-serif);
   font-weight: 300;
   color: var(--color-text-main);
@@ -35,10 +43,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 4.5rem;
+  /* Increased size for impact */
   letter-spacing: -2px;
-  line-height: 1.1;
-  font-weight: 200;
+  line-height: 1;
+  font-weight: 300;
+  /* Keep it relatively light but visible, Fraunces has good weight range */
+  margin-top: 0.5rem;
+  /* Reduced top margin */
 }
 
 a {
@@ -52,9 +64,11 @@ a:hover {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1050px;
+  /* Reduced from 1200px to add back some side padding */
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 0.5rem 1.5rem;
+  /* Reduced top padding significantly */
 }
 
 /* Utilities */

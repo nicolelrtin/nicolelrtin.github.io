@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import PostCard from "../../components/PostCard.astro";
+import ListItem from "../../components/ListItem.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("pages")).sort(
@@ -16,14 +16,15 @@ const description =
     <section>
         <h1 class="page-title">pages.</h1>
         <p class="page-description">{description}</p>
-        <div class="posts-grid">
+        <div class="posts-list">
             {
                 posts.length > 0 ? (
                     posts.map((post) => (
-                        <PostCard
+                        <ListItem
                             title={post.data.title}
                             description={post.data.description}
                             pubDate={post.data.pubDate}
+                            tags={post.data.tags}
                             href={`/pages/${post.slug}`}
                         />
                     ))
@@ -48,16 +49,10 @@ const description =
         line-height: 1.5;
     }
 
-    .posts-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    @media (min-width: 768px) {
-        .posts-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+    .posts-list {
+        display: flex;
+        flex-direction: column;
+        max-width: 800px; /* Optional: limit width for better readability */
     }
 
     .empty-state {
