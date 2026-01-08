@@ -1,7 +1,7 @@
 ---
-title: "Algospeak: How Social Media Is Transforming the Future of Language by Adam Aleksic"
-description: "Book Review. Relevant, no rating"
-pubDate: 2026-01-07
+title: "Algospeak: How Social Media Is Transforming the Future of Language by Adam Aleksic."
+description: "Book Review. Timely, no rating"
+pubDate: 2025-01-07
 tags: ["books"]
 ---
 Relevant and articulate analysis of online linguistics and its relationship to profiteering algorithms.
