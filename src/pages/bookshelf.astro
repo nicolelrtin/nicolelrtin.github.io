@@ -85,12 +85,12 @@ sortedRead.forEach((book) => {
     lastLabel = label;
 });
 
-const title = "bookshelf.";
+const title = "Digital Bookshelf";
 const description =
-    "a near-complete book list pulled from my goodreads account.";
+    "a near-complete book list. click on the covers to see my goodreads activity.";
 ---
 
-<Layout title="Bookshelf | Personal Website" description={description}>
+<Layout title="Tin Digital Bookshelf" description={description}>
     <section class="page-header">
         <h1 class="page-title">{title}</h1>
         <p class="page-description">{description}</p>
@@ -142,7 +142,7 @@ const description =
     }
 
     .page-description {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: var(--color-text-muted);
         max-width: 600px;
         margin-bottom: 3rem;

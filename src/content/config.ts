@@ -32,8 +32,16 @@ const publicationsCollection = defineCollection({
     }),
 });
 
+const miscCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string().optional(),
+    }),
+});
+
 export const collections = {
     'pages': writingCollection,
     'shelf': booksCollection,
     'publications': publicationsCollection,
+    'misc': miscCollection,
 };

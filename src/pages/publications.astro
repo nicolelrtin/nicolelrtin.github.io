@@ -1,21 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PostCard from "../components/PostCard.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 const publications = (await getCollection("publications")).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const title = "Publications";
-const description = "peer-reviewed academic papers and abstracts.";
+const pubContent = await getEntry("misc", "publications");
+const { Content } = pubContent ? await pubContent.render() : { Content: null };
+
+const title = "Publications | N.Tin";
+const description = "";
+// const description = "peer-reviewed academic papers and abstracts.";
 ---
 
 <Layout title={title} description={description}>
-    <section>
-        <h1 class="page-title">publications.</h1>
+    <section class="publications-page">
+        <h1 class="page-title">Publications</h1>
         <p class="page-description">{description}</p>
+
+        <div class="content markdown-content">
+            {Content ? <Content /> : <p>Loading publications...</p>}
+        </div>
+
         <div class="pubs-list">
+            <div class="list-header">
+                <span class="latest-label">Abstracts & Media</span>
+            </div>
             {
                 publications.length > 0 ? (
                     publications.map((pub) => (
@@ -36,7 +48,7 @@ const description = "peer-reviewed academic papers and abstracts.";
 </Layout>
 
 <style>
-    section {
+    .publications-page {
         max-width: 800px;
         margin: 0 auto;
     }
@@ -46,15 +58,82 @@ const description = "peer-reviewed academic papers and abstracts.";
     }
 
     .page-description {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: var(--color-text-muted);
         max-width: 600px;
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
         line-height: 1.5;
     }
 
+    .markdown-content {
+        font-family: "EB Garamond", serif;
+        font-size: 1.15rem;
+        line-height: 1.5;
+        color: #333;
+        margin-bottom: 5rem;
+    }
+
+    .markdown-content :global(h2) {
+        font-family: var(--font-sans);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+        color: #000;
+        text-transform: none; /* Reset if needed */
+        border: none;
+    }
+
+    .markdown-content :global(p),
+    .markdown-content :global(li) {
+        margin-bottom: 1.25rem;
+    }
+
+    .markdown-content :global(ol) {
+        padding-left: 1.5rem;
+        list-style-type: decimal;
+    }
+
+    .markdown-content :global(ul) {
+        padding-left: 1.2rem;
+        list-style-type: disc;
+    }
+
+    .markdown-content :global(li) {
+        padding-left: 0.5rem;
+    }
+
+    .markdown-content :global(a) {
+        color: inherit;
+        text-decoration: none;
+        word-break: break-all;
+    }
+
+    .markdown-content :global(a:hover) {
+        text-decoration: underline;
+    }
+
+    .markdown-content :global(em) {
+        font-style: italic;
+    }
+
+    .list-header {
+        border-top: 1px solid #e5e5e5;
+        padding-top: 1rem;
+        margin-bottom: 2rem;
+        margin-top: 4rem;
+    }
+
+    .latest-label {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--color-text-muted);
+    }
+
     .pubs-list {
-        max-width: 800px;
+        margin-bottom: 4rem;
     }
 
     .empty-state {
