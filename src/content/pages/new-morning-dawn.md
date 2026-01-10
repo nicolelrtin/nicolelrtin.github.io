@@ -14,5 +14,5 @@ a Child's yawn, a civilization emerging.
 
 Ecology peers out through touched earth,    
 humming with a curious purple glow—   
-colors which only exist for a moment,    
+colors which exist for a moment,    
 colors our eyes cannot carry.

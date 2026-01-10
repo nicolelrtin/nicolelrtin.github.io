@@ -1,0 +1,291 @@
+{
+    "Pierre Bezúkhov": {
+        "nametag": "@pierre",
+        "aliases": [
+            "Pyotr Kirílovich",
+            "Count Bezúkhov"
+        ],
+        "chronology": {
+            "01-02": [
+                "Returns from ten years abroad and makes his first appearance in Petersburg society at @anna_pav's soirée [1, 2]."
+            ],
+            "01-03": [
+                "Observes the Abbé Morio and waits for an opportunity to express his own intellectual views [2]."
+            ],
+            "01-05": [
+                "Desperately defends the French Revolution and Napoleon's 'greatness of soul' in executing the Duc d’Enghien, horrifying the guests [3-7]."
+            ],
+            "01-07": [
+                "Confesses he has not yet chosen a career despite being in Petersburg for three months [8]."
+            ],
+            "01-09": [
+                "Breaks a promise to @andrew and joins @anatole for a night of drinking; helps @dolokhov secure a window-ledge bet [9-11]."
+            ],
+            "01-10": [
+                "Becomes the subject of Moscow gossip following a prank involving a bear and a policeman [12]."
+            ],
+            "01-16": [
+                "Visits his dying father; meets @boris and impulsively decides they must be friends [13-15]."
+            ],
+            "01-18": [
+                "Attends the @rostov_family dinner but remains socially awkward; is publicly reprimanded by @marya_dm for the bear incident [16, 17]."
+            ],
+            "01-20": [
+                "Dances with @natasha, appearing to her as a 'funny' but impressive grown-up [18, 19]."
+            ],
+            "01-22": [
+                "Is led by @anna_mikh through the back stairs to see his dying father [20-22]."
+            ],
+            "01-23": [
+                "Performs the 'awful rite' of saying goodbye to his father, kissing the dying man’s hand [23, 24]."
+            ],
+            "01-24": [
+                "Inherits his father's massive fortune and title after @anna_mikh secures the will [25, 26]."
+            ],
+            "03-01": [
+                "Becomes the most sought-after bachelor in Petersburg society due to his inheritance."
+            ],
+            "03-02": [
+                "Is socially maneuvered by @vasily into a reluctant engagement with @helene."
+            ],
+            "04-04": [
+                "Dueling with @dolokhov after receiving an anonymous letter about @helene's infidelity."
+            ],
+            "05-01": [
+                "Meets the Freemason Bazdéev at a station and decides to join the Brotherhood for spiritual renewal."
+            ],
+            "06-07": [
+                "Becomes disillusioned with the Petersburg Freemasons and their superficiality."
+            ]
+        }
+    },
+    "Prince Andrew Bolkónski": {
+        "nametag": "@andrew",
+        "aliases": [
+            "André",
+            "Prince Andréy",
+            "Bolkónski"
+        ],
+        "chronology": {
+            "01-04": [
+                "Appears at the soirée appearing bored by society; reveals he is going to war as an aide-de-camp to Kutúzov [27, 28]."
+            ],
+            "01-05": [
+                "Defends Napoleon as a great man, though admits some of his actions are hard to justify [29-31]."
+            ],
+            "01-07": [
+                "Advises @pierre never to marry until he is 'old and good for nothing'; expresses deep frustration with his own marriage to @lise [32, 33]."
+            ],
+            "01-26": [
+                "Arrives at Bald Hills with his pregnant wife, @lise; discusses military strategy with his father, @old_bolk [34, 35]."
+            ],
+            "01-28": [
+                "Leaves for the war; receives an antique icon from his sister @mary; tells his father he would be 'ashamed' to be a coward [36-38]."
+            ],
+            "02-03": [
+                "Serves as Kutúzov's trusted adjutant; rebukes Zherkóv for making jokes after the disastrous news of Mack’s surrender [39-41]."
+            ],
+            "02-09": [
+                "Reports the victory at Krems to the Austrian court; enjoys the feeling of 'long-desired happiness' [42, 43]."
+            ],
+            "02-12": [
+                "Is discouraged by the coldness of the Austrian Minister of War; learns that Vienna has fallen [44-52]."
+            ],
+            "02-13": [
+                "Rushes back to the army; intervenes to help a doctor's wife during the chaotic retreat [53-57]."
+            ],
+            "02-21": [
+                "Attends Bagratión's council; bravely defends @tushin against accusations of losing guns [58, 59]."
+            ]
+        }
+    },
+    "Natásha Rostóva": {
+        "nametag": "@natasha",
+        "aliases": [
+            "Natálya Ilyínichna"
+        ],
+        "01-11": [
+            "Introduced as a thirteen-year-old 'volcano' of life; bursts into the drawing room with her doll [88-91]."
+        ],
+        "01-13": [
+            "Witnesses @nicholas and @sonya kissing; subsequently maneuvers @boris into a kiss and a marriage pact [62, 63, 92-95]."
+        ],
+        "01-19": [
+            "Boldly challenges @marya_dm at dinner by asking what dessert will be served [96-98]."
+        ],
+        "01-20": [
+            "Consoles @sonya over @nicholas’s impending departure; dances with the 'funny' @pierre [18, 19, 64]."
+        ]
+    },
+    "Nicholas Rostóv": {
+        "nametag": "@nicholas",
+        "aliases": [
+            "Nikoláy",
+            "Nikólenka",
+            "Kólya"
+        ],
+        "chronology": {
+            "01-11": [
+                "Introduced as an impulsive undergraduate who has decided to join the hussars [60, 61]."
+            ],
+            "01-13": [
+                "Confesses his love to his cousin @sonya and kisses her in the conservatory [62, 63]."
+            ],
+            "01-20": [
+                "Sings 'The Brook' at his family's party; comforts a jealous @sonya [64, 65]."
+            ],
+            "02-04": [
+                "Serves as a cadet in the Pávlograd Hussars; realizes his money has been stolen by Telyánin [66-68]."
+            ],
+            "02-05": [
+                "Confronts Telyánin; returns the money but is shamed; refuses to apologize to his colonel [69-76]."
+            ],
+            "02-08": [
+                "Experiences his first time under fire at the Enns bridge; feels excitement and terror [77-80]."
+            ],
+            "02-19": [
+                "During a charge, his horse is killed and he is wounded; flees the French in a panic [81-83]."
+            ],
+            "02-21": [
+                "Retreats on a gun carriage, feeling lonely and questioning the war [59, 84-87]."
+            ]
+        }
+    },
+    "Anna Pávlovna Schérer": {
+        "nametag": "@anna_pav",
+        "aliases": [
+            "Annette"
+        ],
+        "chronology": {
+            "01-01": [
+                "Hosts a high-society soirée in Petersburg; complains about Napoleon (the 'Antichrist') and political unrest."
+            ],
+            "01-02": [
+                "Skillfully manages her guests like a weaver, ensuring the social flow is perfect; introduces @pierre to society."
+            ],
+            "01-04": [
+                "Discusses a potential marriage match between @anatole and the wealthy @mary."
+            ]
+        }
+    },
+    "Prince Vasíli Kurágin": {
+        "nametag": "@vasily",
+        "aliases": [
+            "Vasíly Sergéevich"
+        ],
+        "chronology": {
+            "01-01": [
+                "Attends @anna_pav's soirée; schemes to get his 'profligate' son @anatole married to @mary."
+            ],
+            "01-24": [
+                "Attempts to intercept the portfolio containing Count Bezúkhov's will but is thwarted by @anna_mikh."
+            ]
+        }
+    },
+    "Princess Mary Bolkónskaya": {
+        "nametag": "@mary",
+        "aliases": [
+            "Márya Nikoláevna",
+            "Marie"
+        ],
+        "chronology": {
+            "01-25": [
+                "Living at Bald Hills, she endures her father @old_bolk's harsh geometry lessons; receives a letter from Julie Karágina."
+            ],
+            "01-28": [
+                "Gives @andrew an antique icon as he leaves for war, demonstrating her deep religious devotion."
+            ]
+        }
+    },
+    "Anna Mikháylovna Drubetskáya": {
+        "nametag": "@anna_mikh",
+        "aliases": [
+            "Princess Drubetskáya"
+        ],
+        "chronology": {
+            "01-04": [
+                "Appears at the soirée to beg @vasily to use his influence for her son, @boris [99-101]."
+            ],
+            "01-14": [
+                "Confesses her extreme poverty to the @countess_rostova; plans to visit Count Bezúkhov for money [102, 103]."
+            ],
+            "01-24": [
+                "Physically struggles with @catiche for the portfolio containing the count's will; secures @pierre’s inheritance [109-113]."
+            ]
+        }
+    },
+    "Hélène Kurágina": {
+        "nametag": "@helene",
+        "aliases": [
+            "Elena Vasílyevna"
+        ],
+        "chronology": {
+            "01-02": [
+                "Present at @anna_pav's soirée; described as a stunning, statuesque beauty who is the 'pearl' of Petersburg society."
+            ],
+            "01-03": [
+                "Enchants the guests with her smile; @pierre is struck by her beauty."
+            ]
+        }
+    },
+    "Borís Drubetskóy": {
+        "nametag": "@boris",
+        "aliases": [
+            "Bórya"
+        ],
+        "chronology": {
+            "01-13": [
+                "Engages in a flirtatious marriage pact with @natasha in the conservatory [92-95]."
+            ],
+            "01-16": [
+                "Meets @pierre at the dying Count Bezúkhov's house; maintains a dignified, proud demeanor despite his poverty."
+            ]
+        }
+    },
+    "Sónya Rostóva": {
+        "nametag": "@sonya",
+        "aliases": [
+            "Sophie"
+        ],
+        "chronology": {
+            "01-13": [
+                "The 'sterile flower'; kisses @nicholas and vows her eternal devotion to him [62, 63]."
+            ],
+            "01-20": [
+                "Weeps over @nicholas's departure for the army; comforted by @natasha [64, 65]."
+            ]
+        }
+    },
+    "Dólokhov": {
+        "nametag": "@dolokhov",
+        "aliases": [
+            "Fédya",
+            "Fyódor Ivánovich"
+        ],
+        "chronology": {
+            "01-09": [
+                "Introduced as a notorious gambler; wins a bet by drinking rum on a window ledge [114-116]."
+            ],
+            "02-20": [
+                "Leads a successful ambush; kills a Frenchman and captures an officer [120-123]."
+            ]
+        }
+    },
+    "Captain Túshin": {
+        "nametag": "@tushin",
+        "aliases": [
+            "Túshin"
+        ],
+        "chronology": {
+            "02-15": [
+                "Found by @andrew in a sutler's tent without his boots; appears timid [124-126]."
+            ],
+            "02-17": [
+                "Commands a battery that sets fire to Schön Grabern; operates in a 'feverish delirium' [127-129]."
+            ],
+            "02-21": [
+                "Is defended by @andrew after being blamed for losing guns [58, 130-132]."
+            ]
+        }
+    }
+}

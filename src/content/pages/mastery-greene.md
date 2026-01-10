@@ -5,7 +5,7 @@ pubDate: 2025-06-22
 tags: ["books"]
 ---
 
-Greene occasionally alls into Gladwellian logical fallacies, cherry-picking historical anecdotes and interpreting narratives to fit his hypotheses. While his language can be arrogant, I find the wisdom to be generally true at heart. At worst, his observations are powerfully illustrative in the same way I find astrological predictions to be. The direct phrasing of his prose makes the connection between anecdote and wisdom crystal clear.
+Greene occasionally falls into Gladwellian logical fallacies, cherry-picking historical anecdotes and interpreting narratives to fit his hypotheses. While his language can be arrogant, I find the wisdom to be generally true at heart. At worst, his observations are powerfully illustrative in the same way I find astrological predictions to be. The direct phrasing of his prose makes the connection between anecdote and wisdom crystal clear.
 
 I appreciate the book’s wisdom for what it is. Greene gives explicit direction in a time where many seek it, though the sole direction he gives is toward occupational mastery. I read this book as I matured in my new career (the "apprenticeship" phase), and his decisive language served almost as a bible of reminders: to attune myself to workplace subcultures and to observe how culture affected processes. Importantly, his text reminded me to be cognizant of my environment, observing with a level of detachment that allowed me to adapt while maintaining the values and perspective that is important to me. 
 

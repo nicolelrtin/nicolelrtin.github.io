@@ -1,0 +1,540 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { characters, relationships } from "../../data/war-and-peace-data";
+
+const title = "War and Peace Book I: Characters & Relationships";
+const description =
+    "An archive of character relationships and plot points in Tolstoy's first book.";
+---
+
+<Layout title={title} description={description}>
+    <div class="archive-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title"></h3>
+                <div class="slider-container">
+                    <input
+                        type="range"
+                        min="1"
+                        max="3"
+                        value="1"
+                        class="slider"
+                        id="part-slider"
+                    />
+                    <div class="slider-labels">
+                        <span>Part I</span>
+                        <span>Part II</span>
+                        <span>Part III</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section" id="selection-area">
+                <h3 class="sidebar-title">Characters</h3>
+                <p class="sidebar-hint" id="no-selection-hint">
+                    select names from the record to view details.
+                </p>
+                <div id="character-list" class="character-list"></div>
+            </div>
+
+            <div
+                class="sidebar-section"
+                id="relationship-area"
+                style="display: none;"
+            >
+                <h3 class="sidebar-title">Relational Dynamics</h3>
+                <div
+                    id="relationship-description"
+                    class="relationship-description"
+                >
+                </div>
+            </div>
+
+            <div id="mobile-notice" class="mobile-notice">
+                <p>Mobile may not be supported</p>
+            </div>
+        </aside>
+
+        <main class="graph-area">
+            <h1 class="graph-page-title">War and Peace Book I</h1>
+            <p class="graph-page-subtitle">
+                Book I character relationships and plot points
+            </p>
+
+            <div class="graph-canvas-container">
+                <svg
+                    id="knowledge-graph"
+                    viewBox="0 0 1000 1600"
+                    preserveAspectRatio="xMidYMin meet"
+                >
+                    <g id="lines-layer"></g>
+                    <g id="nodes-layer"></g>
+                </svg>
+            </div>
+        </main>
+    </div>
+</Layout>
+
+<script define:vars={{ characters, relationships }}>
+    let currentPart = 1;
+    let selectedCharacterIds = new Set();
+
+    const slider = document.getElementById("part-slider");
+    const characterList = document.getElementById("character-list");
+    const selectionHint = document.getElementById("no-selection-hint");
+    const relationshipArea = document.getElementById("relationship-area");
+    const relationshipDesc = document.getElementById(
+        "relationship-description",
+    );
+    const svgLines = document.getElementById("lines-layer");
+    const svgNodes = document.getElementById("nodes-layer");
+
+    /**
+     * NODE POSITIONS (Vertical Progression)
+     * y-axis represents the book's 'gravitational' pull:
+     * 0-400: Petersburg / The Salon
+     * 400-900: Moscow / Rostov Home / Bald Hills
+     * 900-1600: Austrian Front / War
+     */
+    const nodePositions = {
+        // Petersburg (The Salon) - Y: 0-400
+        anna_pavlovna: [500, 40],
+        vasily: [600, 100],
+        helene: [750, 160],
+        hippolyte: [900, 100],
+        pierre: [350, 220],
+        andrei: [550, 300],
+        catiche: [150, 250],
+        kirill_bezukhov: [100, 60],
+        anna_mikhailovna: [250, 100],
+
+        // Moscow & Estates - Y: 400-900
+        count_rostov: [150, 500],
+        countess_rostova: [50, 550],
+        natasha: [250, 650],
+        boris: [400, 450],
+        nikolai: [500, 700],
+        sonya: [150, 750],
+        vera: [50, 400],
+        berg: [50, 300],
+        petya: [100, 850],
+
+        old_bolkonsky: [700, 500],
+        mary: [850, 650],
+        lise: [550, 420],
+        bourienne: [900, 750],
+        anatole: [750, 850],
+
+        // The War - Y: 900-1600
+        kutuzov: [500, 1000],
+        denisov: [700, 1150],
+        dolokhov: [300, 1150],
+        tushin: [550, 1250],
+        bilibin: [800, 950],
+        alexander: [500, 1400],
+        napoleon: [200, 1500],
+    };
+
+    function initGraph() {
+        renderNodes();
+        renderLines();
+        updateUI();
+    }
+
+    function renderNodes() {
+        svgNodes.innerHTML = "";
+        characters.forEach((char) => {
+            const pos = nodePositions[char.id] || [400, 800];
+
+            const group = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "g",
+            );
+            group.setAttribute("class", "node-group");
+            group.setAttribute("id", `node-${char.id}`);
+            group.style.cursor = "pointer";
+
+            // Transparent hit area for easier clicking
+            const hitArea = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle",
+            );
+            hitArea.setAttribute("cx", pos[0]);
+            hitArea.setAttribute("cy", pos[1] - 5);
+            hitArea.setAttribute("r", "20");
+            hitArea.setAttribute("fill", "transparent");
+            hitArea.setAttribute("class", "node-hit-area");
+            group.appendChild(hitArea);
+
+            const circle = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "circle",
+            );
+            circle.setAttribute("cx", pos[0]);
+            circle.setAttribute("cy", pos[1]);
+            circle.setAttribute("r", "3.5");
+            circle.setAttribute("fill", "#171717");
+            circle.setAttribute("class", "node-dot");
+
+            const text = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "text",
+            );
+            text.setAttribute("x", pos[0]);
+            text.setAttribute("y", pos[1] - 10);
+            text.setAttribute("text-anchor", "middle");
+            text.setAttribute("class", "node-label");
+            text.textContent = char.name;
+
+            group.appendChild(circle);
+            group.appendChild(text);
+
+            group.addEventListener("click", (e) => {
+                e.stopPropagation();
+                toggleCharacter(char.id);
+            });
+            svgNodes.appendChild(group);
+        });
+    }
+
+    function renderLines() {
+        svgLines.innerHTML = "";
+        relationships.forEach((rel, index) => {
+            const pos1 = nodePositions[rel.char1];
+            const pos2 = nodePositions[rel.char2];
+
+            if (pos1 && pos2) {
+                const line = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "line",
+                );
+                line.setAttribute("x1", pos1[0]);
+                line.setAttribute("y1", pos1[1]);
+                line.setAttribute("x2", pos2[0]);
+                line.setAttribute("y2", pos2[1]);
+                line.setAttribute("class", "rel-line");
+                line.setAttribute(
+                    "id",
+                    `line-${index}-${rel.char1}-${rel.char2}`,
+                );
+                svgLines.appendChild(line);
+            }
+        });
+    }
+
+    function toggleCharacter(id) {
+        if (selectedCharacterIds.has(id)) {
+            selectedCharacterIds.delete(id);
+        } else {
+            selectedCharacterIds.add(id);
+        }
+        updateUI();
+    }
+
+    function updateUI() {
+        const part = parseInt(currentPart);
+
+        // Update node highlights
+        characters.forEach((char) => {
+            const node = document.getElementById(`node-${char.id}`);
+            if (selectedCharacterIds.has(char.id)) {
+                node.classList.add("selected");
+            } else {
+                node.classList.remove("selected");
+            }
+        });
+
+        // Update line highlights AND visibility based on progression
+        relationships.forEach((rel, index) => {
+            const line = document.getElementById(
+                `line-${index}-${rel.char1}-${rel.char2}`,
+            );
+            const isActiveInPart = rel.activeParts.includes(part);
+
+            if (isActiveInPart) {
+                line.style.opacity = "1";
+                if (
+                    selectedCharacterIds.has(rel.char1) &&
+                    selectedCharacterIds.has(rel.char2)
+                ) {
+                    line.classList.add("active");
+                } else {
+                    line.classList.remove("active");
+                }
+            } else {
+                line.style.opacity = "0";
+                line.classList.remove("active");
+            }
+        });
+
+        // Update Sidebar
+        if (selectedCharacterIds.size === 0) {
+            selectionHint.style.display = "block";
+            characterList.innerHTML = "";
+            relationshipArea.style.display = "none";
+        } else {
+            selectionHint.style.display = "none";
+            characterList.innerHTML = "";
+
+            Array.from(selectedCharacterIds).forEach((id) => {
+                const char = characters.find((c) => c.id === id);
+                const item = document.createElement("div");
+                item.className = "character-item";
+                item.innerHTML = `
+          <div class="char-header">
+            <span class="char-name">${char.name}</span>
+            <span class="char-close">×</span>
+          </div>
+          <p class="char-summary">${char[`part${part}`]}</p>
+        `;
+                item.querySelector(".char-header").addEventListener(
+                    "click",
+                    () => toggleCharacter(id),
+                );
+                characterList.appendChild(item);
+            });
+
+            // Update Relational Dynamics in Sidebar
+            const selectedArr = Array.from(selectedCharacterIds);
+            let foundRelationships = [];
+
+            for (let i = 0; i < selectedArr.length; i++) {
+                for (let j = i + 1; j < selectedArr.length; j++) {
+                    const rel = relationships.find(
+                        (r) =>
+                            ((r.char1 === selectedArr[i] &&
+                                r.char2 === selectedArr[j]) ||
+                                (r.char1 === selectedArr[j] &&
+                                    r.char2 === selectedArr[i])) &&
+                            r.activeParts.includes(part),
+                    );
+                    if (rel) foundRelationships.push(rel);
+                }
+            }
+
+            if (foundRelationships.length > 0) {
+                relationshipArea.style.display = "block";
+                relationshipDesc.innerHTML = foundRelationships
+                    .map((rel) => {
+                        const c1 = characters.find(
+                            (c) => c.id === rel.char1,
+                        ).name;
+                        const c2 = characters.find(
+                            (c) => c.id === rel.char2,
+                        ).name;
+                        return `
+            <div class="rel-item">
+              <span class="rel-title">${c1} & ${c2}</span>
+              <span class="rel-desc">${rel.description}</span>
+              <p class="rel-evo">${rel.evolution[`part${part}`]}</p>
+            </div>
+          `;
+                    })
+                    .join("");
+            } else {
+                relationshipArea.style.display = "none";
+            }
+        }
+    }
+
+    slider.addEventListener("input", (e) => {
+        currentPart = e.target.value;
+        updateUI();
+    });
+
+    initGraph();
+</script>
+
+<style>
+    .archive-container {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 4rem; /* Wider gap / margins */
+        min-height: 80vh;
+        border-top: 1px solid #e5e5e5;
+        padding-top: 2rem;
+        max-width: 1300px; /* Increased from 1050px */
+        margin: 0 auto;
+    }
+
+    /* Override Layout's default container width for this specific experience */
+    :global(.container) {
+        max-width: 1400px !important;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 2rem;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+        font-family: var(--font-sans);
+        padding-right: 2rem;
+        border-right: 1px solid #e5e5e5;
+    }
+
+    .sidebar-section {
+        margin-bottom: 3rem;
+    }
+
+    .sidebar-title {
+        font-size: 0rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text-muted);
+        /* margin-bottom: 1.5rem; */
+        font-family: var(--font-sans);
+        font-weight: 500;
+    }
+
+    .slider {
+        width: 100%;
+        accent-color: #171717;
+        height: 2px;
+    }
+
+    .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.65rem;
+        color: var(--color-text-muted);
+        margin-top: 0.5rem;
+    }
+
+    .character-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .character-item {
+        padding-bottom: 1rem;
+    }
+
+    .char-name {
+        font-family: "EB Garamond", serif;
+        font-size: 0.8rem; /* Smaller as requested */
+        font-weight: 500;
+    }
+
+    .char-summary {
+        font-family: "EB Garamond", serif;
+        font-size: 0.7rem;
+        color: var(--color-text-main);
+        line-height: 1;
+        margin-top: 0.5rem;
+        opacity: 0.8;
+    }
+
+    .rel-item {
+        margin-bottom: 2rem;
+    }
+
+    .rel-title {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+    }
+
+    .rel-desc {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        letter-spacing: 0.03em;
+    }
+
+    .rel-evo {
+        font-family: "EB Garamond", serif;
+        font-size: 0.9rem;
+        margin-top: 0.4rem;
+        line-height: 1.4;
+        color: var(--color-text-main);
+        opacity: 0.8;
+    }
+
+    .graph-area {
+        padding-left: 1rem;
+    }
+
+    .graph-page-title {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        font-family: var(--font-serif);
+    }
+
+    .graph-page-subtitle {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin-bottom: 4rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .graph-canvas-container {
+        width: 100%;
+        height: auto; /* Allow it to grow vertically */
+        background: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    #knowledge-graph {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    :global(.node-label) {
+        font-family: var(--font-sans);
+        font-size: 10px;
+        fill: #a3a3a3;
+        transition: fill 0.2s ease;
+        pointer-events: auto; /* Ensure text is clickable */
+    }
+
+    :global(.node-group:hover .node-label) {
+        fill: #171717;
+    }
+
+    :global(.node-group.selected .node-label) {
+        fill: #171717;
+        font-weight: 600;
+    }
+
+    :global(.node-group.selected circle.node-dot) {
+        r: 5 !important;
+        fill: #fff !important;
+        stroke: #171717 !important;
+        stroke-width: 1.5 !important;
+    }
+
+    :global(.rel-line) {
+        stroke: #d1d1d1; /* Visible but faint gray lines */
+        stroke-width: 0.8;
+        stroke-dasharray: 2, 2;
+        transition: all 0.4s ease;
+        pointer-events: none;
+    }
+
+    :global(.rel-line.active) {
+        stroke: #000; /* Darker black for active selection */
+        stroke-width: 1.5;
+        stroke-dasharray: none;
+        opacity: 1 !important;
+    }
+
+    @media (max-width: 899px) {
+        .archive-container {
+            grid-template-columns: 1fr;
+            padding: 1rem;
+            gap: 2rem;
+        }
+        .sidebar {
+            position: relative;
+            top: 0;
+            border-right: none;
+            border-bottom: 1px solid #e5e5e5;
+            padding-right: 0;
+        }
+    }
+</style>

@@ -1,6 +1,6 @@
 ---
-title: "Fruit of a mystery tree"
-description: "for fun"
+title: "fruit of a mystery tree"
+description: "on a walk"
 pubDate: 2025-06-16
 tags: ["poetry"]
 ---
