@@ -19,7 +19,7 @@
                 "Confesses he has not yet chosen a career despite being in Petersburg for three months [8]."
             ],
             "01-09": [
-                "Breaks a promise to @andrew and joins @anatole for a night of drinking; helps @dolokhov secure a window-ledge bet [9-11]."
+                "Breaks a promise to @andrew and joins @anatole_kuragin for a night of drinking; helps @dolokhov secure a window-ledge bet [9-11]."
             ],
             "01-10": [
                 "Becomes the subject of Moscow gossip following a prank involving a bear and a policeman [12]."
@@ -77,7 +77,7 @@
                 "Advises @pierre never to marry until he is 'old and good for nothing'; expresses deep frustration with his own marriage to @lise [32, 33]."
             ],
             "01-26": [
-                "Arrives at Bald Hills with his pregnant wife, @lise; discusses military strategy with his father, @old_bolk [34, 35]."
+                "Arrives at Bald Hills with his pregnant wife, @lise; discusses military strategy with his father, @nikolai_bolkonski [34, 35]."
             ],
             "01-28": [
                 "Leaves for the war; receives an antique icon from his sister @mary; tells his father he would be 'ashamed' to be a coward [36-38]."
@@ -164,7 +164,7 @@
                 "Skillfully manages her guests like a weaver, ensuring the social flow is perfect; introduces @pierre to society."
             ],
             "01-04": [
-                "Discusses a potential marriage match between @anatole and the wealthy @mary."
+                "Discusses a potential marriage match between @anatole_kuragin and the wealthy @mary."
             ]
         }
     },
@@ -175,25 +175,25 @@
         ],
         "chronology": {
             "01-01": [
-                "Attends @anna_pav's soirée; schemes to get his 'profligate' son @anatole married to @mary."
+                "Attends @anna_pav's soirée; schemes to get his 'profligate' son @anatole_kuragin married to @mary."
+            ],
+            "01-21": [
+                "Plots with the eldest princess to intercept Count Bezúkhov's will, fearing @pierre will inherit everything [63, 64]."
             ],
             "01-24": [
-                "Attempts to intercept the portfolio containing Count Bezúkhov's will but is thwarted by @anna_mikh."
-            ]
-        }
-    },
-    "Princess Mary Bolkónskaya": {
-        "nametag": "@mary",
-        "aliases": [
-            "Márya Nikoláevna",
-            "Marie"
-        ],
-        "chronology": {
-            "01-25": [
-                "Living at Bald Hills, she endures her father @old_bolk's harsh geometry lessons; receives a letter from Julie Karágina."
+                "Unsuccessfully tries to seize the portfolio containing the will during a physical struggle with @anna_mikh [65, 66]."
             ],
-            "01-28": [
-                "Gives @andrew an antique icon as he leaves for war, demonstrating her deep religious devotion."
+            "03-01": [
+                "Takes control of @pierre's affairs after he inherits, installing him in his own house to manage his wealth [67, 68]."
+            ],
+            "03-02": [
+                "Maneuvers @pierre into an engagement with his daughter @helene through social pressure [69, 70]."
+            ],
+            "03-03": [
+                "Visits @nikolai_bolkonski at Bald Hills to propose the match between @anatole_kuragin and @marya [71, 72]."
+            ],
+            "04-06": [
+                "Following the duel between @pierre and @dolokhov, he attempts to convince @pierre of @helene's innocence, but is kicked out [73, 74]."
             ]
         }
     },
@@ -285,6 +285,199 @@
             ],
             "02-21": [
                 "Is defended by @andrew after being blamed for losing guns [58, 130-132]."
+            ]
+        }
+    },
+    "Prince Nikolai Andréevich Bolkónski": {
+        "nametag": "@nikolai_bolkonski",
+        "aliases": [
+            "Old Prince",
+            "Prince Bolkónski"
+        ],
+        "chronology": {
+            "01-14": [
+                "Identified as a wealthy, stingy, and eccentric retired general nicknamed 'the King of Prussia' [1]."
+            ],
+            "01-25": [
+                "Maintains a strict routine at Bald Hills, valuing activity and intelligence while despising idleness and superstition [2].",
+                "Personally educates @mary in algebra and geometry to develop her mind [2, 3]."
+            ],
+            "01-26": [
+                "Receives @andrew and @lise at Bald Hills, remaining skeptical of the multi-national military strategy against Napoleon [2, 4]."
+            ],
+            "01-28": [
+                "Gives @andrew a final warning that he would be 'ashamed' if his son behaved unworthily in the war [5, 6].",
+                "Angrily dismisses @andrew when the moment of parting becomes too emotional [7]."
+            ],
+            "03-03": [
+                "Receives a letter from @vasily and expresses contempt for his character, though he agrees to the visit regarding @mary [8, 9].",
+                "Publicly humiliates @mary for her appearance when she dresses up for the visitors [10, 11]."
+            ],
+            "03-04": [
+                "Subjects @anatole_kuragin to a rigorous and mocking interrogation about his military service and education [12, 13]."
+            ],
+            "03-05": [
+                "Jokingly tells @mary that @anatole_kuragin would likely take @bourienne as his wife and her only as a dowry [14].",
+                "Is pleased when @mary chooses to stay with him rather than marry @anatole_kuragin [15]."
+            ],
+            "05-08": [
+                "Appointed as one of the eight commanders in chief for the national enrollment, which grants him a new surge of energy [16]."
+            ],
+            "05-14": [
+                "Hotly disputes the possibility of perpetual peace with @pierre, calling such ideas 'old women’s nonsense' [17, 18]."
+            ]
+        }
+    },
+    "Princess Marya Bolkónskaya": {
+        "nametag": "@marya",
+        "aliases": [
+            "Márya Nikoláevna",
+            "Mary",
+            "Marie"
+        ],
+        "chronology": {
+            "01-25": [
+                "Lives under her father’s strict tutelage at Bald Hills, finding solace in correspondence with Julie Karágina [2, 19]."
+            ],
+            "01-28": [
+                "Gives @andrew an antique icon to wear at war, expressing her deep religious devotion [20, 21].",
+                "Promises to look after the pregnant @lise during @andrew's absence [22, 23]."
+            ],
+            "03-03": [
+                "Struggles with her own self-image and spiritual doubts upon hearing of @anatole_kuragin's impending visit [24, 25]."
+            ],
+            "03-04": [
+                "Is struck by @anatole_kuragin's physical beauty but remains socially awkward in his presence [26, 27]."
+            ],
+            "03-05": [
+                "Witnesses @anatole_kuragin embracing @bourienne in the conservatory [28, 29].",
+                "Formally refuses @anatole_kuragin’s proposal, deciding her vocation lies in self-sacrifice and religious devotion [30, 31]."
+            ],
+            "05-08": [
+                "Becomes the primary caretaker for her nephew, little Prince Nicholas, following @lise's death [16]."
+            ],
+            "05-13": [
+                "Secretly hosts 'God’s folk' (pilgrims) at Bald Hills against her father's explicit orders [32, 33]."
+            ]
+        }
+    },
+    "Kutúzov": {
+        "nametag": "@kutuzov",
+        "chronology": {
+            "01-04": [
+                "Andrew Bolkónski is appointed as his aide-de-camp as he prepares for the 1805 campaign [34, 35]."
+            ],
+            "02-01": [
+                "Inspects a Russian regiment at Braunau, intentionally showing the Austrian generals the troops' exhausted state and poor boots [36, 37]."
+            ],
+            "02-02": [
+                "Recognizes and greets Timókhin, an officer he remembers from the siege of Ismail [38, 39]."
+            ],
+            "02-03": [
+                "Receives news of General Mack’s surrender and realizes the allied campaign is in jeopardy [40]."
+            ],
+            "02-14": [
+                "Tactically maneuvers a three-day truce with Murat to allow his army and transport to escape destruction [41, 42]."
+            ],
+            "03-11": [
+                "Correctly predicts that the Battle of Austerlitz will be lost but is ignored by the Tsar's inner circle [43]."
+            ],
+            "03-12": [
+                "Falls asleep during the council of war while Weyrother reads the complex battle dispositions [44]."
+            ],
+            "03-16": [
+                "Is wounded in the cheek during the chaotic retreat at Austerlitz [45].",
+                "Despairingly asks @andrew what is happening to the disordered battalions [46]."
+            ],
+            "04-02": [
+                "Subject of harsh gossip in Moscow, where he is blamed for the defeat while Bagratión is hailed as a hero [47, 48]."
+            ]
+        }
+    },
+    "Mademoiselle Bourienne": {
+        "nametag": "@bourienne",
+        "aliases": [
+            "Amelie"
+        ],
+        "chronology": {
+            "01-25": [
+                "Serves as @marya's companion at Bald Hills, bringing an air of French gaiety to the somber household [49]."
+            ],
+            "03-03": [
+                "Enthusiastically helps @lise dress @marya for @anatole_kuragin's arrival while secretly admiring him herself [50, 51]."
+            ],
+            "03-04": [
+                "Flirts openly with @anatole_kuragin and dreams of him being the 'Russian prince' who will carry her away [27, 52]."
+            ],
+            "03-05": [
+                "Is caught in an embrace with @anatole_kuragin by @marya in the conservatory [28].",
+                "Weeps and begs @marya's forgiveness, which is granted with saintly compassion [29, 53]."
+            ]
+        }
+    },
+    "anatole_kuragin Kurágin": {
+        "nametag": "@anatole_kuragin",
+        "chronology": {
+            "01-01": [
+                "Described by @anna_pav and his father as an 'active fool' whose profligate lifestyle costs 40,000 rubles a year [54, 55]."
+            ],
+            "01-09": [
+                "Hosts a night of drinking and debauchery in Petersburg, encouraging @pierre to break his word to @andrew [56, 57]."
+            ],
+            "01-10": [
+                "Subject of Moscow gossip regarding an incident where a policeman was tied to a bear [58]."
+            ],
+            "03-03": [
+                "Arrives at Bald Hills to court @marya; he is indifferent to her but considers the marriage for her fortune [59, 60]."
+            ],
+            "03-04": [
+                "Ignores @marya to flirt with @bourienne, finding the companion far more attractive [27, 61]."
+            ],
+            "03-05": [
+                "Caught embracing @bourienne by @marya; he treats the incident with a gay, shameless smile [28, 29]."
+            ]
+        }
+    },
+    "Hippolyte Kurágin": {
+        "nametag": "@hippolyte",
+        "chronology": {
+            "01-01": [
+                "Described by his father as a 'quiet fool' [54]."
+            ],
+            "01-02": [
+                "Appears at @anna_pav's soirée with Mortemart; he is described as an 'exceedingly ugly' version of his sister [75, 76]."
+            ],
+            "01-05": [
+                "Attempts to smooth over @pierre's awkward political outburst by telling a 'charming Moscow story' in broken Russian [77, 78]."
+            ],
+            "01-06": [
+                "Awkwardly lingers by the pregnant @lise as she leaves the soirée, staring at her through an eyeglass [79-81]."
+            ],
+            "03-11": [
+                "Works as a secretary to the embassy in Brünn, where he is the constant butt of jokes among the diplomatic circle [82, 83]."
+            ],
+            "05-07": [
+                "Tells an unpopular joke at @anna_pav's soirée, suggesting it is wrong to fight 'pour le Roi de Prusse' (for the King of Prussia) [84, 85]."
+            ]
+        }
+    },
+    "Márya Dmítrievna Akhrosímova": {
+        "nametag": "@marya_dm",
+        "chronology": {
+            "01-18": [
+                "Arrives at the Rostóvs' name-day dinner, commanding immediate respect from all guests [1, 2].",
+                "Publicly reprimands @pierre for the 'bear incident' in Petersburg, telling him he should be at the war instead of making a fool of himself [3].",
+                "Corrects the hussar colonel for his loud behavior at the table, noting she has four sons in the army but does not 'fret' like him [4, 5]."
+            ],
+            "01-19": [
+                "Presents @natasha, whom she affectionately calls 'her Cossack,' with a pair of ruby earrings [6].",
+                "Is the target of @natasha’s 'incredible boldness' when the girl interrupts dinner to demand what is for dessert; she responds with a joke about 'carrot ices' before laughing at the girl's spirit [7, 8]."
+            ],
+            "01-20": [
+                "Dances the 'Daniel Cooper' with @count_ilyá_rostov; despite her massive stature and habitual severity, her agility and 'beaming face' during the dance enchant the onlookers [9-11]."
+            ],
+            "03-03": [
+                "Remains a staple of the English Club gossip; she is used as a standard for the 'old-school' Moscow integrity that contrasts with the newer, more cynical generation [12, 13]."
             ]
         }
     }

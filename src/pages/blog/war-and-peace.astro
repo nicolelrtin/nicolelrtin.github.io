@@ -1,70 +1,131 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { characters, relationships } from "../../data/war-and-peace-data";
+import {
+    characters as legacyCharacters,
+    relationships as legacyRelationships,
+} from "../../data/war-and-peace-data";
+import book1_2 from "../../data/war-and-peace-characters-books1-2.json";
+import book3_6 from "../../data/war-and-peace-characters-books3-6.json";
 
-const title = "War and Peace Book I: Characters & Relationships";
+const title = "War and Peace Books I-XI: Characters & Relationships";
 const description =
-    "An archive of character relationships and plot points in Tolstoy's first book.";
+    "An archive of relationships and plot points in Tolstoy's first books.";
+
+// Merge Character Data
+const processedCharacters: Record<string, any> = {};
+
+// Helper to normalize IDs (lowercase, no accents, underscores)
+const slugify = (str: string) =>
+    str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "_")
+        .replace(/^_+|_+$/g, "");
+
+[book1_2, book3_6].forEach((set) => {
+    Object.entries(set).forEach(([name, data]: [string, any]) => {
+        if (!data) return;
+
+        // Consistent key for merging (no accents)
+        const mergeKey = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        if (!processedCharacters[mergeKey]) {
+            let id = data.nametag
+                ? data.nametag.replace("@", "").toLowerCase()
+                : slugify(name);
+
+            // Normalize IDs to match nodePositions precisely
+            if (id.includes("denisov")) id = "denisov";
+            if (id.includes("andrew") || id.includes("andrei")) id = "andrew";
+            if (id === "nicholas" || id === "nikolai") id = "nicholas";
+            if (id === "mary" || id === "marya") id = "marya";
+            if (id.includes("kuragin") && id.includes("vasily")) id = "vasily";
+            if (id.includes("bezukhov") && id.includes("pierre")) id = "pierre";
+            if (id.includes("bolkonsky") && id.includes("nikolai"))
+                id = "nikolai_bolkonski";
+            if (id.includes("anatole")) id = "anatole_kuragin";
+
+            processedCharacters[mergeKey] = {
+                id: id,
+                name: name,
+                nametag: data.nametag || `@${id}`,
+                aliases: data.aliases || [],
+                chronology: data.chronology || {},
+            };
+        } else {
+            processedCharacters[mergeKey].chronology = {
+                ...processedCharacters[mergeKey].chronology,
+                ...(data.chronology || {}),
+            };
+            if (data.nametag && !processedCharacters[mergeKey].nametag) {
+                processedCharacters[mergeKey].nametag = data.nametag;
+            }
+        }
+    });
+});
+
+const characters = Object.values(processedCharacters);
+const relationships = legacyRelationships;
+
+// Extract unique chapters and map books for timeline markers
+const allChapters = [
+    ...new Set(characters.flatMap((c: any) => Object.keys(c.chronology))),
+].sort();
+
+// const bookMarkers = allChapters.reduce((acc: any[], ch, index) => {
+//     const bookNum = parseInt(ch.split("-")[0]);
+//     if (!acc.some((m) => m.book === bookNum)) {
+//         acc.push({ book: bookNum, index, label: `B${bookNum}` });
+//     }
+//     return acc;
+// }, []);
 ---
 
 <Layout title={title} description={description}>
     <div class="archive-container">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title"></h3>
-                <div class="slider-container">
-                    <input
-                        type="range"
-                        min="1"
-                        max="3"
-                        value="1"
-                        class="slider"
-                        id="part-slider"
-                    />
-                    <div class="slider-labels">
-                        <span>Part I</span>
-                        <span>Part II</span>
-                        <span>Part III</span>
-                    </div>
+        <!-- COLUMN 1: Chapter Progression -->
+        <aside class="progress-column" id="progress-column">
+            <h3 class="column-label">Timeline</h3>
+            <div class="slider-vertical-container">
+                <!-- <div class="book-markers">
+                    {
+                        bookMarkers.map((m) => (
+                            <div
+                                class="book-marker"
+                                style={`bottom: ${(m.index / (allChapters.length - 1)) * 100}%`}
+                            >
+                                {m.label}
+                            </div>
+                        ))
+                    }
+                </div> -->
+                <input
+                    type="range"
+                    min="0"
+                    max={allChapters.length - 1}
+                    value="0"
+                    step="1"
+                    class="slider-vertical"
+                    id="chapter-slider"
+                />
+                <div id="current-chapter-display" class="chapter-display">
+                    Book 1, Chapter 1
                 </div>
-            </div>
-
-            <div class="sidebar-section" id="selection-area">
-                <h3 class="sidebar-title">Characters</h3>
-                <p class="sidebar-hint" id="no-selection-hint">
-                    select names from the record to view details.
-                </p>
-                <div id="character-list" class="character-list"></div>
-            </div>
-
-            <div
-                class="sidebar-section"
-                id="relationship-area"
-                style="display: none;"
-            >
-                <h3 class="sidebar-title">Relational Dynamics</h3>
-                <div
-                    id="relationship-description"
-                    class="relationship-description"
-                >
-                </div>
-            </div>
-
-            <div id="mobile-notice" class="mobile-notice">
-                <p>Mobile may not be supported</p>
             </div>
         </aside>
 
-        <main class="graph-area">
-            <h1 class="graph-page-title">War and Peace Book I</h1>
+        <!-- COLUMN 2: Knowledge Graph -->
+        <main class="graph-column">
+            <h1 class="graph-page-title">War and Peace Books I-XI</h1>
             <p class="graph-page-subtitle">
-                Book I character relationships and plot points
+                Book I-XI relationships and plot points
             </p>
 
             <div class="graph-canvas-container">
                 <svg
                     id="knowledge-graph"
-                    viewBox="0 0 1000 1600"
+                    viewBox="0 0 1000 1000"
                     preserveAspectRatio="xMidYMin meet"
                 >
                     <g id="lines-layer"></g>
@@ -72,469 +133,647 @@ const description =
                 </svg>
             </div>
         </main>
-    </div>
-</Layout>
 
-<script define:vars={{ characters, relationships }}>
-    let currentPart = 1;
-    let selectedCharacterIds = new Set();
-
-    const slider = document.getElementById("part-slider");
-    const characterList = document.getElementById("character-list");
-    const selectionHint = document.getElementById("no-selection-hint");
-    const relationshipArea = document.getElementById("relationship-area");
-    const relationshipDesc = document.getElementById(
-        "relationship-description",
-    );
-    const svgLines = document.getElementById("lines-layer");
-    const svgNodes = document.getElementById("nodes-layer");
-
-    /**
-     * NODE POSITIONS (Vertical Progression)
-     * y-axis represents the book's 'gravitational' pull:
-     * 0-400: Petersburg / The Salon
-     * 400-900: Moscow / Rostov Home / Bald Hills
-     * 900-1600: Austrian Front / War
-     */
-    const nodePositions = {
-        // Petersburg (The Salon) - Y: 0-400
-        anna_pavlovna: [500, 40],
-        vasily: [600, 100],
-        helene: [750, 160],
-        hippolyte: [900, 100],
-        pierre: [350, 220],
-        andrei: [550, 300],
-        catiche: [150, 250],
-        kirill_bezukhov: [100, 60],
-        anna_mikhailovna: [250, 100],
-
-        // Moscow & Estates - Y: 400-900
-        count_rostov: [150, 500],
-        countess_rostova: [50, 550],
-        natasha: [250, 650],
-        boris: [400, 450],
-        nikolai: [500, 700],
-        sonya: [150, 750],
-        vera: [50, 400],
-        berg: [50, 300],
-        petya: [100, 850],
-
-        old_bolkonsky: [700, 500],
-        mary: [850, 650],
-        lise: [550, 420],
-        bourienne: [900, 750],
-        anatole: [750, 850],
-
-        // The War - Y: 900-1600
-        kutuzov: [500, 1000],
-        denisov: [700, 1150],
-        dolokhov: [300, 1150],
-        tushin: [550, 1250],
-        bilibin: [800, 950],
-        alexander: [500, 1400],
-        napoleon: [200, 1500],
-    };
-
-    function initGraph() {
-        renderNodes();
-        renderLines();
-        updateUI();
-    }
-
-    function renderNodes() {
-        svgNodes.innerHTML = "";
-        characters.forEach((char) => {
-            const pos = nodePositions[char.id] || [400, 800];
-
-            const group = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "g",
-            );
-            group.setAttribute("class", "node-group");
-            group.setAttribute("id", `node-${char.id}`);
-            group.style.cursor = "pointer";
-
-            // Transparent hit area for easier clicking
-            const hitArea = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "circle",
-            );
-            hitArea.setAttribute("cx", pos[0]);
-            hitArea.setAttribute("cy", pos[1] - 5);
-            hitArea.setAttribute("r", "20");
-            hitArea.setAttribute("fill", "transparent");
-            hitArea.setAttribute("class", "node-hit-area");
-            group.appendChild(hitArea);
-
-            const circle = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "circle",
-            );
-            circle.setAttribute("cx", pos[0]);
-            circle.setAttribute("cy", pos[1]);
-            circle.setAttribute("r", "3.5");
-            circle.setAttribute("fill", "#171717");
-            circle.setAttribute("class", "node-dot");
-
-            const text = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "text",
-            );
-            text.setAttribute("x", pos[0]);
-            text.setAttribute("y", pos[1] - 10);
-            text.setAttribute("text-anchor", "middle");
-            text.setAttribute("class", "node-label");
-            text.textContent = char.name;
-
-            group.appendChild(circle);
-            group.appendChild(text);
-
-            group.addEventListener("click", (e) => {
-                e.stopPropagation();
-                toggleCharacter(char.id);
-            });
-            svgNodes.appendChild(group);
-        });
-    }
-
-    function renderLines() {
-        svgLines.innerHTML = "";
-        relationships.forEach((rel, index) => {
-            const pos1 = nodePositions[rel.char1];
-            const pos2 = nodePositions[rel.char2];
-
-            if (pos1 && pos2) {
-                const line = document.createElementNS(
-                    "http://www.w3.org/2000/svg",
-                    "line",
-                );
-                line.setAttribute("x1", pos1[0]);
-                line.setAttribute("y1", pos1[1]);
-                line.setAttribute("x2", pos2[0]);
-                line.setAttribute("y2", pos2[1]);
-                line.setAttribute("class", "rel-line");
-                line.setAttribute(
-                    "id",
-                    `line-${index}-${rel.char1}-${rel.char2}`,
-                );
-                svgLines.appendChild(line);
-            }
-        });
-    }
-
-    function toggleCharacter(id) {
-        if (selectedCharacterIds.has(id)) {
-            selectedCharacterIds.delete(id);
-        } else {
-            selectedCharacterIds.add(id);
-        }
-        updateUI();
-    }
-
-    function updateUI() {
-        const part = parseInt(currentPart);
-
-        // Update node highlights
-        characters.forEach((char) => {
-            const node = document.getElementById(`node-${char.id}`);
-            if (selectedCharacterIds.has(char.id)) {
-                node.classList.add("selected");
-            } else {
-                node.classList.remove("selected");
-            }
-        });
-
-        // Update line highlights AND visibility based on progression
-        relationships.forEach((rel, index) => {
-            const line = document.getElementById(
-                `line-${index}-${rel.char1}-${rel.char2}`,
-            );
-            const isActiveInPart = rel.activeParts.includes(part);
-
-            if (isActiveInPart) {
-                line.style.opacity = "1";
-                if (
-                    selectedCharacterIds.has(rel.char1) &&
-                    selectedCharacterIds.has(rel.char2)
-                ) {
-                    line.classList.add("active");
-                } else {
-                    line.classList.remove("active");
-                }
-            } else {
-                line.style.opacity = "0";
-                line.classList.remove("active");
-            }
-        });
-
-        // Update Sidebar
-        if (selectedCharacterIds.size === 0) {
-            selectionHint.style.display = "block";
-            characterList.innerHTML = "";
-            relationshipArea.style.display = "none";
-        } else {
-            selectionHint.style.display = "none";
-            characterList.innerHTML = "";
-
-            Array.from(selectedCharacterIds).forEach((id) => {
-                const char = characters.find((c) => c.id === id);
-                const item = document.createElement("div");
-                item.className = "character-item";
-                item.innerHTML = `
-          <div class="char-header">
-            <span class="char-name">${char.name}</span>
-            <span class="char-close">×</span>
-          </div>
-          <p class="char-summary">${char[`part${part}`]}</p>
-        `;
-                item.querySelector(".char-header").addEventListener(
-                    "click",
-                    () => toggleCharacter(id),
-                );
-                characterList.appendChild(item);
-            });
-
-            // Update Relational Dynamics in Sidebar
-            const selectedArr = Array.from(selectedCharacterIds);
-            let foundRelationships = [];
-
-            for (let i = 0; i < selectedArr.length; i++) {
-                for (let j = i + 1; j < selectedArr.length; j++) {
-                    const rel = relationships.find(
-                        (r) =>
-                            ((r.char1 === selectedArr[i] &&
-                                r.char2 === selectedArr[j]) ||
-                                (r.char1 === selectedArr[j] &&
-                                    r.char2 === selectedArr[i])) &&
-                            r.activeParts.includes(part),
-                    );
-                    if (rel) foundRelationships.push(rel);
-                }
-            }
-
-            if (foundRelationships.length > 0) {
-                relationshipArea.style.display = "block";
-                relationshipDesc.innerHTML = foundRelationships
-                    .map((rel) => {
-                        const c1 = characters.find(
-                            (c) => c.id === rel.char1,
-                        ).name;
-                        const c2 = characters.find(
-                            (c) => c.id === rel.char2,
-                        ).name;
-                        return `
-            <div class="rel-item">
-              <span class="rel-title">${c1} & ${c2}</span>
-              <span class="rel-desc">${rel.description}</span>
-              <p class="rel-evo">${rel.evolution[`part${part}`]}</p>
+        <!-- COLUMN 3: Archival Details -->
+        <aside class="details-column" id="details-column">
+            <h3 class="column-label">Details</h3>
+            <div id="details-content" class="details-content">
+                <p class="sidebar-hint" id="no-selection-hint">
+                    select names from the record to view details.
+                </p>
+                <div id="character-details" class="character-details"></div>
+                <div
+                    id="relationship-details"
+                    class="relationship-details"
+                    style="display: none;"
+                >
+                    <h4 class="details-sublabel">Mutual Relations</h4>
+                    <div id="relationship-content"></div>
+                </div>
             </div>
-          `;
-                    })
-                    .join("");
+        </aside>
+    </div>
+
+    <script
+        define:vars={{
+            characters,
+            relationships,
+            allChapters,
+            //  bookMarkers
+        }}
+    >
+        let currentChapterIndex = 0;
+        let selectedCharacterIds = new Set();
+
+        const slider = document.getElementById("chapter-slider");
+        const chapterDisplay = document.getElementById(
+            "current-chapter-display",
+        );
+        const charDetails = document.getElementById("character-details");
+        const relDetails = document.getElementById("relationship-details");
+        const relContent = document.getElementById("relationship-content");
+        const selectionHint = document.getElementById("no-selection-hint");
+        const svgLines = document.getElementById("lines-layer");
+        const svgNodes = document.getElementById("nodes-layer");
+
+        if (slider) slider.max = allChapters.length - 1;
+
+        /**
+         * NODE POSITIONS (Compact 1000x1000)
+         * keys must match JSON nametags (without @)
+         */
+        const nodePositions = {
+            // Petersburg (The Salon) - Y: 50-300
+            anna_pav: [500, 60],
+            vasily: [650, 120],
+            helene: [850, 180],
+            hippolyte: [900, 100],
+            pierre: [350, 250],
+            andrew: [550, 350],
+            catiche: [150, 200],
+            kirill_bezukhov: [100, 80],
+            anna_mikh: [250, 120],
+
+            // Moscow & Estates - Y: 400-650
+            count_rostov: [150, 450],
+            countess_rostova: [50, 500],
+            natasha: [250, 600],
+            boris: [400, 420],
+            nicholas: [500, 650],
+            sonya: [150, 680],
+            marya_dm: [350, 520],
+            vera: [50, 380],
+            berg: [50, 320],
+            petya: [100, 750],
+
+            nikolai_bolkonski: [750, 450],
+            marya: [880, 580],
+            lise: [600, 380],
+            bourienne: [920, 680],
+            anatole_kuragin: [800, 750],
+
+            // The War - Y: 750-950
+            kutuzov: [500, 850],
+            denisov: [700, 920],
+            dolokhov: [300, 920],
+            tushin: [550, 960],
+            bilibin: [850, 880],
+            alexander: [500, 780],
+            napoleon: [200, 880],
+        };
+
+        const formatChapter = (key) => {
+            if (!key || !key.includes("-")) return key;
+            const [b, c] = key.split("-");
+            return `Book ${parseInt(b)}, Chapter ${parseInt(c)}`;
+        };
+
+        // ID normalization for legacy relationships
+        const idMap = {
+            andrei: "andrew",
+            nikolai: "nicholas",
+            anna_pavlovna: "anna_pav",
+            anna_mikhailovna: "anna_mikh",
+        };
+
+        const normalizeId = (id) => idMap[id] || id;
+
+        function initGraph() {
+            renderNodes();
+            updateUI();
+        }
+
+        function renderNodes() {
+            svgNodes.innerHTML = "";
+            characters.forEach((char) => {
+                const pos = nodePositions[char.id] || [400, 800];
+
+                const group = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "g",
+                );
+                group.setAttribute("class", "node-group");
+                group.setAttribute("id", `node-${char.id}`);
+                group.style.cursor = "pointer";
+
+                // Hit area
+                const hitArea = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "circle",
+                );
+                hitArea.setAttribute("cx", pos[0]);
+                hitArea.setAttribute("cy", pos[1] - 5);
+                hitArea.setAttribute("r", "25");
+                hitArea.setAttribute("fill", "transparent");
+                group.appendChild(hitArea);
+
+                const circle = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "circle",
+                );
+                circle.setAttribute("cx", pos[0]);
+                circle.setAttribute("cy", pos[1]);
+                circle.setAttribute("r", "3.5");
+                circle.setAttribute("fill", "#171717");
+                circle.setAttribute("class", "node-dot");
+
+                const text = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "text",
+                );
+                text.setAttribute("x", pos[0]);
+                text.setAttribute("y", pos[1] - 28); // Moved up to clear dot
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("class", "node-label");
+                // Label legibility halo
+                text.setAttribute("stroke", "#fff");
+                text.setAttribute("stroke-width", "4px");
+                text.setAttribute("paint-order", "stroke");
+
+                // Primary Name
+                const mainName = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "tspan",
+                );
+                mainName.textContent = char.name;
+                mainName.setAttribute("x", pos[0]);
+                mainName.setAttribute("font-weight", "500");
+                text.appendChild(mainName);
+
+                // Aliases (smaller/lighter)
+                if (char.aliases && char.aliases.length > 0) {
+                    const aliasSpan = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "tspan",
+                    );
+                    aliasSpan.textContent = char.aliases[0];
+                    aliasSpan.setAttribute("x", pos[0]);
+                    aliasSpan.setAttribute("dy", "15"); // Relative to main name
+                    aliasSpan.setAttribute("font-size", "12px"); // Larger as requested
+                    aliasSpan.setAttribute("opacity", "0.4");
+                    text.appendChild(aliasSpan);
+                }
+
+                group.appendChild(circle);
+                group.appendChild(text);
+
+                group.addEventListener("click", () => toggleCharacter(char.id));
+                svgNodes.appendChild(group);
+            });
+        }
+
+        function toggleCharacter(id) {
+            if (selectedCharacterIds.has(id)) {
+                selectedCharacterIds.delete(id);
             } else {
-                relationshipArea.style.display = "none";
+                selectedCharacterIds.add(id);
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            const currentChapter = allChapters[currentChapterIndex];
+            if (chapterDisplay)
+                chapterDisplay.textContent = formatChapter(currentChapter);
+
+            // 1. Update active lines based on nametag mentions up to current chapter
+            renderLines();
+
+            // 2. Update node highlights
+            characters.forEach((char) => {
+                const node = document.getElementById(`node-${char.id}`);
+                if (node) {
+                    if (selectedCharacterIds.has(char.id)) {
+                        node.classList.add("selected");
+                    } else {
+                        node.classList.remove("selected");
+                    }
+                }
+            });
+
+            // 3. Update Details Panel
+            const selectedArr = Array.from(selectedCharacterIds);
+
+            if (selectedArr.length === 0) {
+                selectionHint.style.display = "block";
+                charDetails.innerHTML = "";
+                relDetails.style.display = "none";
+            } else if (selectedArr.length === 1) {
+                selectionHint.style.display = "none";
+                relDetails.style.display = "none";
+                const char = characters.find((c) => c.id === selectedArr[0]);
+
+                let chronoHTML = Object.entries(char.chronology)
+                    .filter(([chapter]) => chapter <= currentChapter)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(
+                        ([chapter, events]) => `
+                        <div class="char-item">
+                            <span class="chrono-chapter">${formatChapter(chapter)}</span>
+                            ${events.map((e) => `<p class="chrono-item">${e}</p>`).join("")}
+                        </div>
+                    `,
+                    )
+                    .join("");
+
+                charDetails.innerHTML = `
+                    <div class="char-view">
+                        <h2 class="char-name-label">${char.name}</h2>
+                        <div class="char-chronology">${chronoHTML}</div>
+                    </div>
+                `;
+            } else if (selectedArr.length >= 2) {
+                selectionHint.style.display = "none";
+                charDetails.innerHTML = "";
+                relDetails.style.display = "block";
+
+                // Find mutual mentions
+                let mutualHTML = "";
+                for (let i = 0; i < selectedArr.length; i++) {
+                    for (let j = i + 1; j < selectedArr.length; j++) {
+                        const c1 = characters.find(
+                            (c) => c.id === selectedArr[i],
+                        );
+                        const c2 = characters.find(
+                            (c) => c.id === selectedArr[j],
+                        );
+
+                        const mentions = findMutualMentions(
+                            c1,
+                            c2,
+                            currentChapter,
+                        );
+                        if (mentions.length > 0) {
+                            mutualHTML += `
+                                <div class="mutual-group">
+                                    <h4 class="char-name-label">${c1.name} & ${c2.name}</h4>
+                                    ${mentions
+                                        .map(
+                                            (m) => `
+                                        <div class="char-item">
+                                            <span class="chrono-chapter">${formatChapter(m.chapter)}</span>
+                                            <p class="chrono-item"><strong>${m.fromName.split(" ")[0]}:</strong> ${m.text}</p>
+                                        </div>
+                                    `,
+                                        )
+                                        .join("")}
+                                </div>
+                            `;
+                        }
+                    }
+                }
+                relContent.innerHTML =
+                    mutualHTML ||
+                    "<p class='chrono-item'>No shared plot events recorded up to this point.</p>";
             }
         }
-    }
 
-    slider.addEventListener("input", (e) => {
-        currentPart = e.target.value;
-        updateUI();
-    });
+        function renderLines() {
+            svgLines.innerHTML = "";
+            const currentChapter = allChapters[currentChapterIndex];
 
-    initGraph();
-</script>
+            // Combine legacy family relations and dynamic plot relations
+            characters.forEach((char, i) => {
+                characters.slice(i + 1).forEach((other) => {
+                    const isFamily = relationships.some((r) => {
+                        const r1 = normalizeId(r.char1);
+                        const r2 = normalizeId(r.char2);
+                        return (
+                            (r1 === char.id && r2 === other.id) ||
+                            (r1 === other.id && r2 === char.id)
+                        );
+                    });
 
-<style>
-    .archive-container {
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        gap: 4rem; /* Wider gap / margins */
-        min-height: 80vh;
-        border-top: 1px solid #e5e5e5;
-        padding-top: 2rem;
-        max-width: 1300px; /* Increased from 1050px */
-        margin: 0 auto;
-    }
+                    const hasPlotLink =
+                        findMutualMentions(char, other, currentChapter).length >
+                        0;
 
-    /* Override Layout's default container width for this specific experience */
-    :global(.container) {
-        max-width: 1400px !important;
-    }
+                    if (isFamily || hasPlotLink) {
+                        const pos1 = nodePositions[char.id];
+                        const pos2 = nodePositions[other.id];
+                        if (pos1 && pos2) {
+                            const line = document.createElementNS(
+                                "http://www.w3.org/2000/svg",
+                                "line",
+                            );
+                            line.setAttribute("x1", pos1[0]);
+                            line.setAttribute("y1", pos1[1]);
+                            line.setAttribute("x2", pos2[0]);
+                            line.setAttribute("y2", pos2[1]);
+                            line.setAttribute("class", "rel-line");
 
-    .sidebar {
-        position: sticky;
-        top: 2rem;
-        max-height: calc(100vh - 4rem);
-        overflow-y: auto;
-        font-family: var(--font-sans);
-        padding-right: 2rem;
-        border-right: 1px solid #e5e5e5;
-    }
+                            if (
+                                selectedCharacterIds.has(char.id) &&
+                                selectedCharacterIds.has(other.id)
+                            ) {
+                                line.classList.add("active");
+                            }
 
-    .sidebar-section {
-        margin-bottom: 3rem;
-    }
+                            svgLines.appendChild(line);
+                        }
+                    }
+                });
+            });
+        }
 
-    .sidebar-title {
-        font-size: 0rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--color-text-muted);
-        /* margin-bottom: 1.5rem; */
-        font-family: var(--font-sans);
-        font-weight: 500;
-    }
+        function findMutualMentions(c1, c2, currentChapter) {
+            const mentions = [];
 
-    .slider {
-        width: 100%;
-        accent-color: #171717;
-        height: 2px;
-    }
+            // Normalize for comparison
+            const normalize = (s) =>
+                s
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
+            const tag1 = normalize(c1.nametag);
+            const tag2 = normalize(c2.nametag);
 
-    .slider-labels {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.65rem;
-        color: var(--color-text-muted);
-        margin-top: 0.5rem;
-    }
+            // Check c1's chronology for c2's nametag
+            Object.entries(c1.chronology).forEach(([chapter, events]) => {
+                if (chapter <= currentChapter) {
+                    events.forEach((text) => {
+                        if (normalize(text).includes(tag2)) {
+                            mentions.push({
+                                chapter,
+                                text,
+                                fromId: c1.id,
+                                fromName: c1.name,
+                            });
+                        }
+                    });
+                }
+            });
+            // Check c2's chronology for c1's nametag
+            Object.entries(c2.chronology).forEach(([chapter, events]) => {
+                if (chapter <= currentChapter) {
+                    events.forEach((text) => {
+                        if (normalize(text).includes(tag1)) {
+                            mentions.push({
+                                chapter,
+                                text,
+                                fromId: c2.id,
+                                fromName: c2.name,
+                            });
+                        }
+                    });
+                }
+            });
+            return mentions.sort((a, b) => a.chapter.localeCompare(b.chapter));
+        }
 
-    .character-list {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
+        if (slider)
+            slider.addEventListener("input", (e) => {
+                currentChapterIndex = parseInt(e.target.value);
+                updateUI();
+            });
 
-    .character-item {
-        padding-bottom: 1rem;
-    }
+        initGraph();
+    </script>
 
-    .char-name {
-        font-family: "EB Garamond", serif;
-        font-size: 0.8rem; /* Smaller as requested */
-        font-weight: 500;
-    }
-
-    .char-summary {
-        font-family: "EB Garamond", serif;
-        font-size: 0.7rem;
-        color: var(--color-text-main);
-        line-height: 1;
-        margin-top: 0.5rem;
-        opacity: 0.8;
-    }
-
-    .rel-item {
-        margin-bottom: 2rem;
-    }
-
-    .rel-title {
-        display: block;
-        font-size: 0.75rem;
-        font-weight: 600;
-        margin-bottom: 0.2rem;
-    }
-
-    .rel-desc {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        color: var(--color-text-muted);
-        letter-spacing: 0.03em;
-    }
-
-    .rel-evo {
-        font-family: "EB Garamond", serif;
-        font-size: 0.9rem;
-        margin-top: 0.4rem;
-        line-height: 1.4;
-        color: var(--color-text-main);
-        opacity: 0.8;
-    }
-
-    .graph-area {
-        padding-left: 1rem;
-    }
-
-    .graph-page-title {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-        font-family: var(--font-serif);
-    }
-
-    .graph-page-subtitle {
-        font-size: 0.85rem;
-        color: var(--color-text-muted);
-        margin-bottom: 4rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-    }
-
-    .graph-canvas-container {
-        width: 100%;
-        height: auto; /* Allow it to grow vertically */
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    #knowledge-graph {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    :global(.node-label) {
-        font-family: var(--font-sans);
-        font-size: 10px;
-        fill: #a3a3a3;
-        transition: fill 0.2s ease;
-        pointer-events: auto; /* Ensure text is clickable */
-    }
-
-    :global(.node-group:hover .node-label) {
-        fill: #171717;
-    }
-
-    :global(.node-group.selected .node-label) {
-        fill: #171717;
-        font-weight: 600;
-    }
-
-    :global(.node-group.selected circle.node-dot) {
-        r: 5 !important;
-        fill: #fff !important;
-        stroke: #171717 !important;
-        stroke-width: 1.5 !important;
-    }
-
-    :global(.rel-line) {
-        stroke: #d1d1d1; /* Visible but faint gray lines */
-        stroke-width: 0.8;
-        stroke-dasharray: 2, 2;
-        transition: all 0.4s ease;
-        pointer-events: none;
-    }
-
-    :global(.rel-line.active) {
-        stroke: #000; /* Darker black for active selection */
-        stroke-width: 1.5;
-        stroke-dasharray: none;
-        opacity: 1 !important;
-    }
-
-    @media (max-width: 899px) {
+    <style>
         .archive-container {
-            grid-template-columns: 1fr;
-            padding: 1rem;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: 80px 2fr 350px; /* Wider progress column for markers */
+            gap: 0;
+            min-height: 80vh;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 2rem;
+            margin: 0 auto;
         }
-        .sidebar {
+
+        /* Override Layout's default container width for this specific experience */
+        :global(.container) {
+            max-width: 1600px !important;
+        }
+
+        .progress-column {
+            position: sticky;
+            top: 2rem;
+            height: calc(100vh - 10rem);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .slider-vertical-container {
+            height: 85%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
             position: relative;
-            top: 0;
-            border-right: none;
-            border-bottom: 1px solid #e5e5e5;
-            padding-right: 0;
         }
-    }
-</style>
+
+        .slider-vertical {
+            writing-mode: bt-lr; /* Vertical slider */
+            -webkit-appearance: slider-vertical;
+            width: 6px;
+            height: 100%;
+            accent-color: #3e3e3e;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* .book-markers {
+            position: absolute;
+            height: 100%;
+            width: 60px;
+            right: 100%;
+            margin-right: 10px;
+            pointer-events: none;
+            z-index: 1;
+        } */
+
+        /* .book-marker {
+            position: absolute;
+            right: 0;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            color: #888;
+            white-space: nowrap;
+            text-align: right;
+            border-top: 1px solid #eee;
+            width: 30px;
+            padding-top: 2px;
+            transform: translateY(-50%);
+        } */
+
+        .chapter-display {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0em;
+        }
+
+        .graph-column {
+            padding: 0 2rem; /* Buffer between columns */
+        }
+
+        .details-column {
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+            font-family: var(--font-sans);
+            padding-left: 1rem;
+        }
+
+        .column-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem; /* Reduced space */
+            font-family: var(--font-sans);
+        }
+
+        .details-content {
+            margin-top: 0;
+        }
+
+        .character-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .char-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .char-name-label {
+            font-family: "EB Garamond", serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #171717;
+            margin-bottom: 0.5rem;
+        }
+
+        .char-chronology {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .chrono-item {
+            font-family: "EB Garamond", serif;
+            font-size: 1.05rem; /* Larger reading font */
+            line-height: 1.5;
+            color: #444; /* Dark gray as requested */
+            margin-top: 0.2rem;
+        }
+
+        .chrono-chapter {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .details-sublabel {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 2rem 0 1rem 0; /* Reduced space */
+            color: var(--color-text-muted);
+            font-family: var(--font-sans);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.2rem;
+        }
+
+        .graph-area {
+            padding-left: 100rem;
+        }
+
+        .graph-page-title {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-serif);
+        }
+
+        .graph-page-subtitle {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .graph-canvas-container {
+            width: 100%;
+            height: auto; /* Allow it to grow vertically */
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        #knowledge-graph {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        :global(.node-label) {
+            font-family: var(--font-sans);
+            font-size: 15px; /* Larger as requested */
+            fill: #777;
+            transition: all 0.2s ease;
+            pointer-events: auto; /* Ensure text is clickable */
+        }
+
+        :global(.node-group:hover .node-label) {
+            fill: #171717;
+        }
+
+        :global(.node-group.selected .node-label) {
+            fill: #171717;
+            font-weight: 700;
+        }
+
+        :global(.node-group.selected circle.node-dot) {
+            r: 5 !important;
+            fill: #fff !important;
+            stroke: #171717 !important;
+            stroke-width: 1.5 !important;
+        }
+
+        :global(.rel-line) {
+            stroke: #d1d1d1; /* Visible but faint gray lines */
+            stroke-width: 0.8;
+            stroke-dasharray: 2, 2;
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        :global(.rel-line.active) {
+            stroke: #000; /* Darker black for active selection */
+            stroke-width: 1.2;
+            stroke-dasharray: none;
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 899px) {
+            .archive-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 2rem;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid #e5e5e5;
+                padding-right: 0;
+            }
+        }
+    </style>
+</Layout>
