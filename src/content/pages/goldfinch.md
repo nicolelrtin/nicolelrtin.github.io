@@ -1,6 +1,6 @@
 ---
-title: "The Goldfinch by Donna Tartt"
-description: "Book Review. 4.7/5"
+title: "Pursuit of Beauty"
+description: "Book Review: The Goldfinch by Donna Tartt. 4.7/5"
 pubDate: 2025-02-04
 tags: ["books"]
 ---

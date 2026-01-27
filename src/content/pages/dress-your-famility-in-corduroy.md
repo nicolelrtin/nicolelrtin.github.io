@@ -1,6 +1,6 @@
 ---
-title: "Dress Your Family in Corduroy and Denim by David Sedaris"
-description: "Book Review. 4/5."
+title: "Writing in Child's Logic"
+description: "Book Review: Dress Your Family in Corduroy and Denim by David Sedaris. 4/5."
 pubDate: 2025-06-21
 tags: ["books"]
 ---

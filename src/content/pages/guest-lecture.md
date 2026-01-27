@@ -1,6 +1,6 @@
 ---
-title: "The Guest Lecture by Martin Riker"
-description: "Book Review. Creative 3/5."
+title: "Faithful representation of Women in STEM in fiction"
+description: "Book Review: The Guest Lecture by Martin Riker. Creative 3/5."
 pubDate: 2025-11-24
 tags: ["books"]
 ---

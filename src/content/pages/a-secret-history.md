@@ -1,6 +1,6 @@
 ---
-title: "A Secret History by Donna Tartt"
-description: "Book Review. Interesting, no rating."
+title: "An entertaining, modern take on Greek tragedy"
+description: "Book Review: A Secret History by Donna Tartt. Interesting, no rating."
 pubDate: 2025-02-26
 tags: ["books"]
 ---

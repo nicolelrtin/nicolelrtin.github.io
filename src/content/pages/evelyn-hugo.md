@@ -1,6 +1,6 @@
 ---
-title: "The Seven Husbands of Evelyn Hugo by Taylor Jenkins Reid"
-description: "Book Review. Summer Reading 4/5."
+title: "LGBTQ Representation and Complex Characters"
+description: "Book Review: The Seven Husbands of Evelyn Hugo by Taylor Jenkins Reid. Summer Reading 4/5."
 pubDate: 2025-07-03
 tags: ["books"]
 ---

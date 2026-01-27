@@ -1,5 +1,5 @@
 ---
-title: "Good Entertainment, On Tyranny"
+title: "Good Entertainment, On Tyranny."
 description: "Book(s) Review."
 pubDate: 2025-02-06
 tags: ["books"]
