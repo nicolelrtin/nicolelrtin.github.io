@@ -11,7 +11,7 @@ The lesser-repeated advice that I found useful, as an undergrad and for <a href=
 ## 1. Networking is Making Acquaintances
 "Networking" is a loaded term with good intentions. It makes a world of difference to know people who can vouch for your skills and interests. It is not easy to find these people as an undergraduate, especially when you are knee deep in classes and campus life. 
 
-By nature, most of the people you meet you will never see again. Don't treat them like it! The important thing is to get out of your comfort zone and meet people so you may *potentially* make a friend that understands you and *may potentially* help you out. Going to office hours, and being friendly, will not guarantee you a connection with graduate students or a professor, but it opens opportunity for a shared interest, or a referral to someone else. Going to a recruiting event will not guarantee a connection, but you can learn about a new field or a new perspective to your career. 
+By nature, most of the people you meet you will never see again. Don't treat them like it! The important thing is to get out of your comfort zone and meet people in the chance that you may make a friend that understands you, and can *potentially* help you out. Going to office hours, and being friendly, will not guarantee you a connection with graduate students or a professor, but it opens opportunity for a shared interest, or a referral to someone else. Going to a recruiting event will not guarantee a connection, but you can learn about a new field or a new perspective to your career. 
 
 A useful question to ask is always: 
 <blockquote>"I'm curious to learn more about ___.   
