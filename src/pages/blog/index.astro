@@ -3,7 +3,23 @@ import Layout from "../../layouts/Layout.astro";
 import ListItem from "../../components/ListItem.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("pages")).sort(
+const collectionPosts = await getCollection("pages");
+
+const staticEntries = [
+    {
+        data: {
+            title: "Guide to War and Peace",
+            description:
+                "An interactive graph of the many characters and relationships (updated: Books I-XI).",
+            pubDate: new Date("2026-01-08"),
+            tags: ["books", "tools"],
+        },
+        slug: "war-and-peace",
+        body: "",
+    },
+];
+
+const allPosts = [...collectionPosts, ...staticEntries].sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
@@ -32,17 +48,9 @@ const description =
         <div class="list-header"></div>
 
         <div class="posts-list">
-            <ListItem
-                title="Guide to War and Peace"
-                description="An interactive graph of the many characters and relationships (updated: Books I-XI)."
-                preview=" "
-                pubDate={new Date()}
-                tags={["books", "tools"]}
-                href="/blog/war-and-peace"
-            />
             {
-                posts.length > 0 ? (
-                    posts.map((post) => (
+                allPosts.length > 0 ? (
+                    allPosts.map((post) => (
                         <ListItem
                             title={post.data.title}
                             description={post.data.description}
