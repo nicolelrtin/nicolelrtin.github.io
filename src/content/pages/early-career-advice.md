@@ -6,7 +6,7 @@ tags: ["guides"]
 ---
 
 There is an abundance of high-quality college and career advice online and given by school resources. A lot of advice is repeated in consensus, which makes basic convention easy to find. Topics for college admissions, resume formatting, and interview preparation are well documented among troves of online resources.  
-The lesser-repeated advice that I found useful, as an undergrad and for my <a href="https://cdss.berkeley.edu/dsus/mentorshiphub">Berkeley DSUS mentees</a>, I have documented here. 
+The lesser-repeated advice that I found useful, as an undergrad and for <a href="https://cdss.berkeley.edu/dsus/mentorshiphub">Berkeley DSUS mentees</a>, I have documented here. 
 
 ## 1. Networking is Making Acquaintances
 "Networking" is a loaded term with good intentions. It makes a world of difference to know people who can vouch for your skills and interests. It is not easy to find these people as an undergraduate, especially when you are knee deep in classes and campus life. 
