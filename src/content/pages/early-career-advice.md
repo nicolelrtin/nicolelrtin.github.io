@@ -52,7 +52,7 @@ Be prepared for common interview questions[^1].
 * Tell me about a time you had to work with a team and how you contributed.
 * Tell me about X project?
 * Why are you interested in this role?
-[^1]: More thorough guides for responding to these questions are common internet topics.
+[^1]: More thorough guides are common internet topics. Who do you practice with? Someone that likes interviewing people. I was lucky enough for my dad to be one of those people.
 
 Your living document should evolve with you. Your written and oral notes can work together to paint the mosaic of your different experiences and values. 
 
