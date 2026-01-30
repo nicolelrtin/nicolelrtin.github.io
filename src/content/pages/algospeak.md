@@ -1,5 +1,5 @@
 ---
-title: "How often do we get a formal meta-analysis of the current zeitgeist written by one of its own?"
+title: "Intellectualizing internet slang"
 description: "Book Review: Algospeak: How Social Media Is Transforming the Future of Language by Adam Aleksic. Timely, no rating"
 pubDate: 2025-01-07
 tags: ["books"]
