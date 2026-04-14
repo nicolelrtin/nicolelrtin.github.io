@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// const description =
+//     "I'm employed at Gilead Sciences where I'm working on computer vision projects in drug development including on long-acting HIV (lenacapavir) and green chemistry. I'm also a part of Velexi Research, where I research image characteristics of skin textures.";
+---
+
+<Layout title="About | N.Tin">
+    <section class="intro">
+        <h1 class="hero-title">About</h1>
+        <p class="page-description">
+            I'm employed at <a
+                href="https://www.gilead.com/"
+                target="_blank"
+                rel="noopener noreferrer">Gilead Sciences</a
+            >
+            where I'm grateful to be working on cool computer vision projects in drug
+            development, including on long-acting HIV prophylaxis and treatments (<a
+                href="https://en.wikipedia.org/wiki/Lenacapavir"
+                target="_blank"
+                rel="noopener noreferrer">lenacapavir</a
+            >) and green chemistry. I'm also a part of <a
+                href="https://velexi.com/"
+                target="_blank"
+                rel="noopener noreferrer">Velexi Research</a
+            >, where I research quantitative image characteristics of biological
+            age.
+        </p>
+    </section>
+</Layout>
+
+<style>
+    .intro {
+        margin-top: 0;
+        margin-bottom: 4rem;
+    }
+
+    .hero-title {
+        margin-bottom: 1rem;
+    }
+
+    .page-description {
+        font-size: 1rem;
+        color: var(--color-text-muted);
+        max-width: 600px;
+        margin-bottom: 3rem;
+        line-height: 1.5;
+    }
+
+    .page-description a {
+        color: #a49480ac;
+        text-decoration: italic;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+        text-decoration-color: #e5e5e5;
+    }
+
+    .page-description a:hover {
+        text-decoration-color: #a3a3a3ac;
+    }
+</style>

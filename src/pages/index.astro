@@ -1,41 +1,80 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ListItem from "../components/ListItem.astro";
+import { getCollection } from "astro:content";
 
-// const description =
-//     "I'm employed at Gilead Sciences where I'm working on computer vision projects in drug development including on long-acting HIV (lenacapavir) and green chemistry. I'm also a part of Velexi Research, where I research image characteristics of skin textures.";
+const collectionPosts = await getCollection("pages");
+
+const staticEntries = [
+    {
+        data: {
+            title: "Guide to War and Peace",
+            description:
+                "An interactive graph of the many characters and relationships (updated: Books I-XI).",
+            pubDate: new Date("2026-01-08"),
+            tags: ["guides"],
+        },
+        slug: "war-and-peace",
+        body: "",
+    },
+];
+
+const allPosts = [...collectionPosts, ...staticEntries].sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+function getPreview(content: string) {
+    // Remove markdown symbols and extra whitespace
+    const stripped = content
+        .replace(/[#*`_]/g, "")
+        .replace(/\[(.*?)\]\(.*?\)/g, "$1")
+        .replace(/\n+/g, " ")
+        .trim();
+    return stripped.length > 200
+        ? stripped.substring(0, 200) + "..."
+        : stripped;
+}
+
+const title = "Blog";
+const description =
+    "a collection of opinions, including book reviews and personal philosophies.";
 ---
 
-<Layout title="About | N.Tin">
-    <section class="intro">
-        <h1 class="hero-title">About</h1>
-        <p class="page-description">
-            I'm employed at <a
-                href="https://www.gilead.com/"
-                target="_blank"
-                rel="noopener noreferrer">Gilead Sciences</a
-            >
-            where I'm grateful to be working on cool computer vision projects in drug
-            development, including on long-acting HIV prophylaxis and treatments (<a
-                href="https://en.wikipedia.org/wiki/Lenacapavir"
-                target="_blank"
-                rel="noopener noreferrer">lenacapavir</a
-            >) and green chemistry. I'm also a part of <a
-                href="https://velexi.com/"
-                target="_blank"
-                rel="noopener noreferrer">Velexi Research</a
-            >, where I research quantitative image characteristics of biological
-            age.
-        </p>
+<Layout title={title} description={description}>
+    <section>
+        <h1 class="page-title">Blog</h1>
+        <p class="page-description">{description}</p>
+
+        <div class="list-header"></div>
+
+        <div class="posts-list">
+            {
+                allPosts.length > 0 ? (
+                    allPosts.map((post) => (
+                        <ListItem
+                            title={post.data.title}
+                            description={post.data.description}
+                            preview={getPreview(post.body)}
+                            pubDate={post.data.pubDate}
+                            tags={post.data.tags}
+                            href={`/blog/${post.slug}`}
+                        />
+                    ))
+                ) : (
+                    <p class="empty-state">No essays yet. Check back soon.</p>
+                )
+            }
+        </div>
     </section>
 </Layout>
 
 <style>
-    .intro {
-        margin-top: 0;
-        margin-bottom: 4rem;
+    section {
+        max-width: 800px;
+        margin: 0 auto;
     }
 
-    .hero-title {
+    .page-title {
         margin-bottom: 1rem;
     }
 
@@ -43,19 +82,22 @@ import Layout from "../layouts/Layout.astro";
         font-size: 1rem;
         color: var(--color-text-muted);
         max-width: 600px;
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
         line-height: 1.5;
     }
 
-    .page-description a {
-        color: #a49480ac;
-        text-decoration: italic;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 3px;
-        text-decoration-color: #e5e5e5;
+    .list-header {
+        border-top: 1px solid #e5e5e5;
+        margin-bottom: 3rem;
     }
 
-    .page-description a:hover {
-        text-decoration-color: #a3a3a3ac;
+    .posts-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .empty-state {
+        color: var(--color-text-muted);
+        font-style: italic;
     }
 </style>

@@ -1,9 +1,9 @@
 ---
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
+  { href: "/", label: "Blog" },
   { href: "/bookshelf", label: "Bookshelf" },
   { href: "/publications", label: "Publications" },
+  { href: "/about", label: "About" },
 ];
 
 const { pathname } = Astro.url;
@@ -18,7 +18,8 @@ const { pathname } = Astro.url;
             href={link.href}
             class={
               pathname === link.href ||
-              (link.href !== "/" && pathname.startsWith(link.href))
+              (link.href !== "/" && pathname.startsWith(link.href)) ||
+              (link.href === "/" && pathname.startsWith("/blog"))
                 ? "active"
                 : ""
             }
